@@ -1,12 +1,12 @@
 package co.edu.uniquindio.poo.proyectofinalcarrouq.Model;
 
 public class UserName {
-    private String userName;
+    private String username;
     private String password;
 
     //Constructor con parametros
-    public UserName(String userName, String password) {
-        this.userName = userName;
+    public UserName(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -15,8 +15,8 @@ public class UserName {
     }
 
     //Getters y Setters
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -24,7 +24,7 @@ public class UserName {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public void setPassword(String password) {
