@@ -10,7 +10,7 @@ public abstract class Persona {
     private int edad;
 
     //Constructor con parametros
-    public Persona(String nombre, String cedula, String correo, Genero genero, int edad) {
+    public Persona( String cedula,String nombre, String correo, Genero genero, int edad) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.correo = correo;
@@ -63,6 +63,6 @@ public abstract class Persona {
         this.edad = edad;
     }
 
-    
+
     
 }
