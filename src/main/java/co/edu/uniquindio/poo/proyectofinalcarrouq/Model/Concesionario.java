@@ -345,6 +345,80 @@ public class Concesionario {
         }
     }
 
+    //metodo para remover vehiculo
+    public void removerVehiculo(Vehiculo vehiculo) throws VehiculoException {
+        if (vehiculo == null){
+            throw new VehiculoException("Vehiculo Nulo");
+        } else if (vehiculo instanceof Sedan){
+            Sedan sedan = (Sedan) vehiculo;
+            if(!listaSedanes.remove(sedan)) {
+                throw new VehiculoException("Vehiculo no encontrado en la lista de sedanes");
+            }
+        } else if (vehiculo instanceof Moto) {
+            Moto moto = (Moto) vehiculo;
+            if (!listaMotos.remove(moto)) {
+                throw new VehiculoException("Vehiculo no encontrado en la lista de motos");
+            }
+        } else if (vehiculo instanceof Deportivo) {
+            Deportivo deportivo = (Deportivo) vehiculo;
+            if(!listaDeportivos.remove(deportivo)) {
+                throw new VehiculoException("vehiculo no encontrado en la lista de deportivos");
+            }
+        } else if (vehiculo instanceof Camioneta) {
+            Camioneta camioneta = (Camioneta) vehiculo;
+            if(!listaCamionetas.remove(camioneta)){
+                throw new VehiculoException("vehiculo no encontrado en la lista de camionetas");
+            }
+        } else if (vehiculo instanceof PickUps) {
+            PickUps pickUps = (PickUps) vehiculo;
+            if(!listaPickUps.remove(pickUps)){
+                throw new VehiculoException("vehiculo no encontrado en la lista de PickUps");
+            }
+        } else if (vehiculo instanceof Vans) {
+            Vans vans = (Vans) vehiculo;
+            if(!listaVans.remove(vans)){
+                throw new VehiculoException("vehiculo no encontrado en la lista de vans");
+            }
+        } else if (vehiculo instanceof Bus) {
+            Bus bus = (Bus) vehiculo;
+            if(!listaBuses.remove(bus)){
+                throw new VehiculoException("vehiculo no encontrado en la lista de camionetas");
+            }
+        } else if (vehiculo instanceof Camion) {
+            Camion camion = (Camion) vehiculo;
+            if(!listaCamiones.remove(camion)){
+                throw new VehiculoException("vehiculo no encontrado en la lista de camiones");
+            }
+        } else {
+            throw new VehiculoException("vehiculo no encontrado");
+        }}
     
 
+    //metodo para actualizar vehiculo
+    public void actualizarVehiculo(Vehiculo vehiculo){
+        if (vehiculo != null){
+            if (vehiculo instanceof Sedan){
+                Sedan sedan = (Sedan) vehiculo;
+                listaSedanes.set(listaSedanes.indexOf(sedan),sedan);
+            } else if (vehiculo instanceof Moto) {
+                Moto moto = (Moto) vehiculo;
+                listaMotos.set(listaMotos.indexOf(moto), moto);
+            } else if (vehiculo instanceof Deportivo) {
+                Deportivo deportivo = (Deportivo) vehiculo;
+                listaDeportivos.set(listaDeportivos.indexOf(deportivo), deportivo);
+            } else if (vehiculo instanceof Camioneta) {
+                Camioneta camioneta = (Camioneta) vehiculo;
+                listaCamionetas.set(listaCamionetas.indexOf(camioneta), camioneta);
+            } else if (vehiculo instanceof PickUps) {
+                PickUps pickUps = (PickUps) vehiculo;
+                listaPickUps.set(listaPickUps.indexOf(pickUps), pickUps);
+            } else if (vehiculo instanceof Vans) {
+                Vans vans = (Vans) vehiculo;
+                listaVans.set(listaVans.indexOf(vans), vans);
+            } else if (vehiculo instanceof Bus) {
+                Bus bus = (Bus) vehiculo;
+                listaBuses.set(listaBuses.indexOf(bus), bus);
+            }
+        }
+    }
 }
