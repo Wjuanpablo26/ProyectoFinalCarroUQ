@@ -110,5 +110,21 @@ public class EmpleadoController {
         return this.modelFactory.obtenerPicKups());
     }
 
+    public int addVan(Van van) throws VehiculoException{
+        return this.modelFactory.addVan(van);
+    }
+
+    public deleteVan(Van van) throws VehiculoException{
+        returns this.modelFactory.deleteVan(van);
+    }
+
+    public boolean actualizarVan(String placa, Van van) throws VehiculoException{
+        return this.modelFactory.actualizarVan(van);
+    }
+
+    public ArrayList<Van> obtenerVan(){
+        return this.modelFactory.obtenerVan();
+    }
+
 
 }
