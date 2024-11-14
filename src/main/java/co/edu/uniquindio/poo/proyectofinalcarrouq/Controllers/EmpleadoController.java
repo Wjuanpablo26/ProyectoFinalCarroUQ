@@ -54,8 +54,8 @@ public class EmpleadoController {
         return this.modelFactory.deleteDeportivo(deportivo);
     }
 
-    public boolean actualizarDeportivo(Deportivo deportivo){
-        return this.modelFactory.actualizarDeportivo(deportivo);
+    public boolean actualizarDeportivo(String placa, Deportivo deportivo){
+        return this.modelFactory.actualizarDeportivo(placa, deportivo);
     }
 
     public ArrayList<Deportivo> obtenerDeportivos(){
@@ -70,8 +70,8 @@ public class EmpleadoController {
         return this.modelFactory.deleteMoto(moto);
     }
 
-    public boolean actualizarMoto(Moto moto) throws VehiculoException{
-        return this.modelFactory.actualizarMoto(moto);
+    public boolean actualizarMoto(String placa, Moto moto) throws VehiculoException{
+        return this.modelFactory.actualizarMoto(placa, moto);
     }
 
     public ArrayList<Moto> obtenerMotos(){
@@ -86,11 +86,29 @@ public class EmpleadoController {
         returns this.modelFactory.deleteCamioneta(camioneta);
     }
 
-    public boolean actualizarCamioneta(Camioneta camioneta) throws VehiculoException{
-        return this.modelFactory.actualizarCamioneta(camioneta);
+    public boolean actualizarCamioneta(String placa, Camioneta camioneta) throws VehiculoException{
+        return this.modelFactory.actualizarCamioneta(placa, camioneta);
     }
 
     public ArrayList<Camioneta> obtenerCamionetas(){
         return this.modelFactory.obtenerCamionetas();
     }
+
+    public int addPickUp(Pickup pickup) throws VehiculoException{
+        return this.modelFactory.addPickUp(pickup);
+    }
+
+    public deletePickUp(PickUp pickup) throws VehiculoException{
+        returns this.modelFactory.deletePickUp(pickup);
+    }
+
+    public boolean actualizarPickUp(String placa, PickUp pickup) throws VehiculoException{
+        return this.modelFactory.actualizarPickup(pickup);
+    }
+
+    public ArrayList<PickUp> obtenerPicKups(){
+        return this.modelFactory.obtenerPicKups());
+    }
+
+
 }
