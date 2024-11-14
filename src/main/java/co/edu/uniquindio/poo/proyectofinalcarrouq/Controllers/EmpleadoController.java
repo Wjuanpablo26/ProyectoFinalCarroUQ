@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.proyectofinalcarrouq.Controllers;
 
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Deportivo;
 
 import java.util.ArrayList;
 
@@ -45,4 +46,35 @@ public class EmpleadoController {
         return this.modelFactory.obtenerSedans();
     }
 
+    public int addDeportivo (Deportivo deportivo) throws VehiculoException{
+        return this.modelFactory.addDeportivo(deportivo);
+    }
+
+    public int deleteDeportivo(Deportivo deportivo) throws VehiculoException{
+        return this.modelFactory.deleteDeportivo(deportivo);
+    }
+
+    public boolean actualizarDeportivo(Deportivo deportivo){
+        return this.modelFactory.actualizarDeportivo(deportivo);
+    }
+
+    public ArrayList<Deportivo> obtenerDeportivos(){
+        return this.modelFactory.obtenerDeportivos();
+    }
+
+    public int addMoto (Moto moto) throws VehiculoException{
+        return this.modelFactory.addMoto;
+    }
+
+    public int deleteMoto (Moto moto) throws VehiculoException{
+        return this.modelFactory.deleteMoto(moto);
+    }
+
+    public boolean actualizarMoto(Moto moto) throws VehiculoException{
+        return this.modelFactory.actualizarMoto(moto);
+    }
+
+    public ArrayList<Moto> obtenerMotos(){
+        return this.modelFactory.obtenerMotos();
+    }
 }
