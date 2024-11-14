@@ -77,4 +77,20 @@ public class EmpleadoController {
     public ArrayList<Moto> obtenerMotos(){
         return this.modelFactory.obtenerMotos();
     }
+
+    public int addCamioneta(Camioneta camioneta) throws VehiculoException{
+        return this.modelFactory.addCamioneta(camioneta);
+    }
+
+    public deleteCamioneta(Camioneta camioneta) throws VehiculoException{
+        returns this.modelFactory.deleteCamioneta(camioneta);
+    }
+
+    public boolean actualizarCamioneta(Camioneta camioneta) throws VehiculoException{
+        return this.modelFactory.actualizarCamioneta(camioneta);
+    }
+
+    public ArrayList<Camioneta> obtenerCamionetas(){
+        return this.modelFactory.obtenerCamionetas();
+    }
 }
