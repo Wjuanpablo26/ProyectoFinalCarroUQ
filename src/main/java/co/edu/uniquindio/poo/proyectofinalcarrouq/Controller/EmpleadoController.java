@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.proyectofinalcarrouq.Controllers;
+package co.edu.uniquindio.poo.proyectofinalcarrouq.Controller;
 
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
@@ -6,7 +6,6 @@ import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Deportivo;
 
 import java.util.ArrayList;
 
-import com.uniquindio.carrouq.Model.Cliente;
 
 public class EmpleadoController {
     ModelFactory modelFactory = ModelFactory.getInstance();
@@ -99,7 +98,7 @@ public class EmpleadoController {
     }
 
     public deletePickUp(PickUp pickup) throws VehiculoException{
-        returns this.modelFactory.deletePickUp(pickup);
+        return this.modelFactory.deletePickUp(pickup);
     }
 
     public boolean actualizarPickUp(String placa, PickUp pickup) throws VehiculoException{
@@ -107,7 +106,7 @@ public class EmpleadoController {
     }
 
     public ArrayList<PickUp> obtenerPicKups(){
-        return this.modelFactory.obtenerPicKups());
+        return this.modelFactory.obtenerPicKups();
     }
 
     public int addVan(Van van) throws VehiculoException{
@@ -115,7 +114,7 @@ public class EmpleadoController {
     }
 
     public deleteVan(Van van) throws VehiculoException{
-        returns this.modelFactory.deleteVan(van);
+        return this.modelFactory.deleteVan(van);
     }
 
     public boolean actualizarVan(String placa, Van van) throws VehiculoException{
