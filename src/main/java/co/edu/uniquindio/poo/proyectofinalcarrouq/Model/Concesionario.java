@@ -3,6 +3,8 @@ import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Persona;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.TipoTransaccion;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -421,4 +423,211 @@ public class Concesionario {
             }
         }
     }
+
+    public boolean carroExiste(String placa){
+        return Stream.of(listaSedanes, listaMotos, listaDeportivos, listaCamionetas, listaPickUps, listaVans, listaBuses, listaCamiones)
+                .flatMap(Collection::stream).anyMatch(persona-> persona.getPlaca().equalsIgnoreCase(placa));
+    }
+
+    public Vehiculo encontrarVehiculo(String placa){
+        return Stream.of(listaSedanes, listaMotos, listaDeportivos, listaCamionetas, listaPickUps, listaVans, listaBuses, listaCamiones)
+                .flatMap(Collection::stream)
+                .filter(vehiculo -> vehiculo.getPlaca().equalsIgnoreCase(placa)) //filtrar por placa
+                .findFirst()//obtener el primer elemento encontrado
+                .orElse(null);//si no se encuentra, retorna null
+    }
+
+    // __________________ Sedan _____________________
+
+    public ArrayList<Sedan> obtenerSedans(){
+        return listaSedanes;
+    }
+
+    public void actualizarSedan(String placa, Sedan sedanActualizado){
+        for(Sedan sedan : listaSedanes){
+            if(sedan.getPlaca().equals(placa)) {
+                listaSedanes.set(listaSedanes.indexOf(sedan), sedanActualizado);
+                break;}}}
+
+    public Sedan encontrarSedan(String placa){
+        return listaSedanes.stream()
+                .filter(sedan -> sedan.getPlaca().equalsIgnoreCase(placa))
+                .findFirst().orElse(null);}
+
+    //_______________ Moto ________________________
+
+    public ArrayList<Moto> obtenerMotos(){
+        return listaMotos;
+    }
+
+    public void actualizarMoto(String placa, Moto motoActualizado){
+        for(Moto moto : listaMotos){
+            if(moto.getPlaca().equals(placa)){
+                listaMotos.set(listaMotos.indexOf(moto), motoActualizado);
+                break;}}}
+    
+
+    public Moto encontrarMoto(String placa){
+        return listaMotos.stream()
+                .filter(moto -> moto.getPlaca().equalsIgnoreCase(placa))
+                .findFirst()
+                .orElse(null);}
+    
+
+    //_____________________ Deportivo __________________
+
+    public ArrayList<Deportivo> obtenerDeportivos(){
+        return listaDeportivos;
+    }
+
+    public void actualizarDeportivo(String placa, Deportivo deportivoActualizado){
+        for(Deportivo deportivo : listaDeportivos){
+            if(deportivo.getPlaca().equals(placa)){
+                listaDeportivos.set(listaDeportivos.indexOf(deportivo), deportivoActualizado);
+                break;}}}
+    
+
+    public Deportivo encontrarDeportivo(String placa){
+        return listaDeportivos.stream()
+                .filter(deportivo -> deportivo.getPlaca().equalsIgnoreCase(placa))
+                .findFirst()
+                .orElse(null);}
+
+
+    //_________________________ camioneta_____________________
+
+    public ArrayList<Camioneta> obtenerCamionetas(){
+        return listaCamionetas;
+    }
+
+    public void actualizarCamioneta(String placa, Camioneta camionetaActualizado){
+        for(Camioneta camioneta : listaCamionetas){
+            if(camioneta.getPlaca().equals(placa)){
+                listaCamionetas.set(listaCamionetas.indexOf(camioneta), camionetaActualizado);
+                break;}}}
+    
+
+    public Camioneta encontrarCamioneta(String placa){
+        return listaCamionetas.stream()
+                .filter(camioneta -> camioneta.getPlaca().equalsIgnoreCase(placa))
+                .findFirst()
+                .orElse(null);}
+
+
+    //__________________ PickUp_________________
+
+    public ArrayList<PickUps> obtenerPickUps(){
+        return listaPickUps;
+    }
+
+    public void actualizarPickUp(String placa, PickUps pickUpActualizada){
+        for(PickUps pickUp : listaPickUps){
+            if(pickUp.getPlaca().equals(placa)){
+                listaPickUps.set(listaPickUps.indexOf(pickUp), pickUpActualizada);
+                break;}}}
+    
+
+    public PickUps encontrarPickUp(String placa){
+        return listaPickUps.stream()
+                .filter(pickUp -> pickUp.getPlaca().equalsIgnoreCase(placa))
+                .findFirst()
+                .orElse(null);}
+
+
+    //__________________ Vans __________________
+
+    public ArrayList<Vans> obtenerVans(){
+        return listaVans;
+    }
+
+    public void actualizarVans(String placa, Vans vanActualizada){
+        for(Vans vans : listaVans){
+            if(vans.getPlaca().equals(placa)){
+                listaVans.set(listaVans.indexOf(vans), vanActualizada);
+                break;}}}
+    
+
+    public Vans encontrarVans(String placa){
+        return listaVans.stream()
+                .filter(vans -> vans.getPlaca().equalsIgnoreCase(placa))
+                .findFirst()
+                .orElse(null);}
+
+    //__________________ Bus _______________________
+
+    public ArrayList<Bus> obtenerBus(){
+        return listaBuses;
+    }
+
+    public void actualizarBus(String placa, Bus busActualizado){
+        for(Bus bus : listaBuses){
+            if(bus.getPlaca().equals(placa)){
+                listaBuses.set(listaBuses.indexOf(bus), busActualizado);
+                break;}}}
+    
+
+    public Bus encontrarBus(String placa){
+        return listaBuses.stream()
+                .filter(bus -> bus.getPlaca().equalsIgnoreCase(placa))
+                .findFirst()
+                .orElse(null);}
+
+
+    //_________________ Camion _______________________
+
+    public ArrayList<Camion> obtenerCamiones(){
+        return listaCamiones;
+    }
+
+    public void actualizarCamion(String placa, Camion camionActualizado){
+        for(Camion camion : listaCamiones){
+            if(camion.getPlaca().equals(placa)){
+                listaCamiones.set(listaCamiones.indexOf(camion), camionActualizado);
+                break;}}}
+    
+
+    public Camion encontrarCamion(String placa){
+        return listaCamiones.stream()
+                .filter(camion -> camion.getPlaca().equalsIgnoreCase(placa))
+                .findFirst()
+                .orElse(null);}
+    
+
+    //________________ Venta _________________
+
+    public void agregarVenta(Venta venta) throws VehiculoException{
+        if(venta != null){
+            listaVentas.add(venta);
+            Vehiculo vehiculo = venta.getVehiculo();
+            actualizarVehiculo(vehiculo);
+        }else{
+            throw new VehiculoException("la venta no puede ser nula");
+        }
+    }
+
+    public void deleteVenta(Venta venta) throws VehiculoException {
+        if(!venta.getTipoTransaccion().equals(TipoTransaccion.VENTA)){
+            listaVentas.remove(venta);
+            Vehiculo vehiculo = venta.getVehiculo();
+            actualizarVehiculo(vehiculo);
+        }else{
+            throw new VehiculoException("la venta no puede ser borrada");
+        }
+    }
+
+    public void actualizarVenta(String id, Venta ventaActualizada) throws VehiculoException{
+        if(!ventaActualizada.getTipoTransaccion().equals(TipoTransaccion.VENTA)){
+            for(Venta venta : listaVentas){
+                if(venta.getCodigo().equals(id)){
+                    listaVentas.set(listaVentas.indexOf(venta), ventaActualizada);
+                    break;
+                }}
+        }else{
+            throw new VehiculoException("la venta no puede ser actualizada");}}
+
+    public ArrayList<Venta> obtenerVentas(){
+        return listaVentas;
+    }
 }
+
+
