@@ -1,4 +1,10 @@
 package co.edu.uniquindio.poo.proyectofinalcarrouq.Controller;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Admin;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Venta;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Empleado;;
+import java.util.ArrayList;
+
 
 public class AdminController {
 

@@ -1,129 +1,159 @@
 package co.edu.uniquindio.poo.proyectofinalcarrouq.Controller;
-
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Deportivo;
-
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Cliente;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Admin;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Bus;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camion;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camioneta;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Moto;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Empleado;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.PickUps;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Sedan;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Vans;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Venta;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
+import java.net.CacheRequest;
 import java.util.ArrayList;
 
 
 public class EmpleadoController {
-    ModelFactory modelFactory = ModelFactory.getInstance();
+    ModelFactory modelFactory;
 
     public EmpleadoController(){
+        modelFactory = ModelFactory.getInstance();
     }
 
+    //Cliente
     public int addCliente(Cliente cliente) throws PersonaException{
-        return this.modelFactory.addCliente(cliente);
+        return modelFactory.addCliente(cliente);
     }
 
     public int removeCliente (Cliente cliente) throws PersonaException{
-        return this.modelFactory.deleteCliente(cliente);
+        return modelFactory.deleteCliente(cliente);
     }
 
     public boolean actualizarCliente (String cedula, Cliente cliente)throws PersonaException{
-        return this.modelFactory.actualizarCliente(cedula, cliente);
+        return modelFactory.actualizarCliente(cedula, cliente);
     }
 
-    public ArrayList<Cliente> obtenerClientes{
-        return this.modelFactory.obtenerClientes();
+    public ArrayList<Cliente> obtenerClientes(){
+        return modelFactory.obtenerClientes();
     }
 
+    //Vehículo
+    public int removerVehiculo(Vehiculo vehiculo) throws PersonaException{
+        return modelFactory.deleteVehiculo(vehiculo);
+    }
+
+    //Sedan
     public int addSedan (Sedan sedan) throws VehiculoException{
-        return this.modelFactory.addSedan(sedan);
-    }
-
-    public int deleteSedan (Sedan sedan) throws VehiculoException{
-        return this.modelFactory.deleteSedan(sedan);
+        return modelFactory.addSedan(sedan);
     }
 
     public boolean actualizarSedan(String placa, Sedan sedan) throws VehiculoException{
-        return this.modelFactory.actualizarSedan(placa, sedan);
+        return modelFactory.actualizarSedan(placa, sedan);
     }
 
     public ArrayList<Sedan> obtenerSedans (){
-        return this.modelFactory.obtenerSedans();
+        return modelFactory.obtenerSedans();
     }
 
+    //Deportivo
     public int addDeportivo (Deportivo deportivo) throws VehiculoException{
-        return this.modelFactory.addDeportivo(deportivo);
+        return modelFactory.addDeportivo(deportivo);
     }
 
-    public int deleteDeportivo(Deportivo deportivo) throws VehiculoException{
-        return this.modelFactory.deleteDeportivo(deportivo);
-    }
-
-    public boolean actualizarDeportivo(String placa, Deportivo deportivo){
-        return this.modelFactory.actualizarDeportivo(placa, deportivo);
+    public boolean actualizarDeportivo(String placa, Deportivo deportivo) throws VehiculoException{
+        return modelFactory.actualizarDeportivo(placa, deportivo);
     }
 
     public ArrayList<Deportivo> obtenerDeportivos(){
-        return this.modelFactory.obtenerDeportivos();
+        return modelFactory.obtenerDeportivos();
     }
 
+    //Moto
     public int addMoto (Moto moto) throws VehiculoException{
-        return this.modelFactory.addMoto;
-    }
-
-    public int deleteMoto (Moto moto) throws VehiculoException{
-        return this.modelFactory.deleteMoto(moto);
+        return modelFactory.addMoto;
     }
 
     public boolean actualizarMoto(String placa, Moto moto) throws VehiculoException{
-        return this.modelFactory.actualizarMoto(placa, moto);
+        return modelFactory.actualizarMoto(placa, moto);
     }
 
     public ArrayList<Moto> obtenerMotos(){
-        return this.modelFactory.obtenerMotos();
+        return modelFactory.obtenerMotos();
     }
 
+    //Camioneta
     public int addCamioneta(Camioneta camioneta) throws VehiculoException{
-        return this.modelFactory.addCamioneta(camioneta);
-    }
-
-    public deleteCamioneta(Camioneta camioneta) throws VehiculoException{
-        returns this.modelFactory.deleteCamioneta(camioneta);
+        return modelFactory.addCamioneta(camioneta);
     }
 
     public boolean actualizarCamioneta(String placa, Camioneta camioneta) throws VehiculoException{
-        return this.modelFactory.actualizarCamioneta(placa, camioneta);
+        return modelFactory.actualizarCamioneta(placa, camioneta);
     }
 
     public ArrayList<Camioneta> obtenerCamionetas(){
-        return this.modelFactory.obtenerCamionetas();
+        return modelFactory.obtenerCamionetas();
     }
 
-    public int addPickUp(Pickup pickup) throws VehiculoException{
-        return this.modelFactory.addPickUp(pickup);
+    //Pickup
+    public int addPickUp(PickUps pickup) throws VehiculoException{
+        return modelFactory.addPickUp(pickup);
     }
 
-    public deletePickUp(PickUp pickup) throws VehiculoException{
-        return this.modelFactory.deletePickUp(pickup);
+    public boolean actualizarPickUp(String placa, PickUps pickup) throws VehiculoException{
+        return modelFactory.actualizarPickup(pickup);
     }
 
-    public boolean actualizarPickUp(String placa, PickUp pickup) throws VehiculoException{
-        return this.modelFactory.actualizarPickup(pickup);
+    public ArrayList<PickUps> obtenerPicKups(){
+        return modelFactory.obtenerPicKups();
     }
 
-    public ArrayList<PickUp> obtenerPicKups(){
-        return this.modelFactory.obtenerPicKups();
+    //Van
+    public int addVan(Vans van) throws VehiculoException{
+        return modelFactory.addVan(van);
     }
 
-    public int addVan(Van van) throws VehiculoException{
-        return this.modelFactory.addVan(van);
+    public boolean actualizarVan(String placa, Vans van) throws VehiculoException{
+        return modelFactory.actualizarVan(van);
     }
 
-    public deleteVan(Van van) throws VehiculoException{
-        return this.modelFactory.deleteVan(van);
+    public ArrayList<Vans> obtenerVan(){
+        return modelFactory.obtenerVan();
     }
 
-    public boolean actualizarVan(String placa, Van van) throws VehiculoException{
-        return this.modelFactory.actualizarVan(van);
+    //Bus
+    public int addBus(Bus bus) throws VehiculoException{
+        return modelFactory.addBus(bus);
     }
 
-    public ArrayList<Van> obtenerVan(){
-        return this.modelFactory.obtenerVan();
+    public boolean actualizarBus(String placa, Bus bus) throws VehiculoException{
+        return modelFactory.actualizarBus(placa, bus);
     }
 
+    public ArrayList<Bus> obtenerBuses(){
+        return modelFactory.obtenerBuses();
+    }
+
+    //Camion
+    public int addCamion(Camion camion) throws VehiculoException{
+        return modelFactory.addCamion(camion);
+    }
+
+    public boolean actualizarCamion(String placa, Camion camion) throws VehiculoException{
+        return modelFactory.actualizarCamion(placa, camion);
+    }
+
+    public ArrayList<Camion> obtenerCamiones(){
+        return modelFactory.obtenerCamiones();
+    }
+
+    //Venta
+    public int addVenta(Venta venta) throws VehiculoException{
+        return modelFactory.addventa(venta);
+    }
 
 }
