@@ -424,11 +424,13 @@ public class Concesionario {
         }
     }
 
+    //metodo para saber si un vehiculo existe
     public boolean carroExiste(String placa){
         return Stream.of(listaSedanes, listaMotos, listaDeportivos, listaCamionetas, listaPickUps, listaVans, listaBuses, listaCamiones)
                 .flatMap(Collection::stream).anyMatch(persona-> persona.getPlaca().equalsIgnoreCase(placa));
     }
 
+    //metodo para encontrar un vehiculo
     public Vehiculo encontrarVehiculo(String placa){
         return Stream.of(listaSedanes, listaMotos, listaDeportivos, listaCamionetas, listaPickUps, listaVans, listaBuses, listaCamiones)
                 .flatMap(Collection::stream)
@@ -437,29 +439,32 @@ public class Concesionario {
                 .orElse(null);//si no se encuentra, retorna null
     }
 
-    // __________________ Sedan _____________________
-
+    
+    //Metodo para obtener los sedanes
     public ArrayList<Sedan> obtenerSedans(){
         return listaSedanes;
     }
 
+    //Metodo para actualizar el sedan
     public void actualizarSedan(String placa, Sedan sedanActualizado){
         for(Sedan sedan : listaSedanes){
             if(sedan.getPlaca().equals(placa)) {
                 listaSedanes.set(listaSedanes.indexOf(sedan), sedanActualizado);
                 break;}}}
 
+    //Metodo para encontrar un sedan
     public Sedan encontrarSedan(String placa){
         return listaSedanes.stream()
                 .filter(sedan -> sedan.getPlaca().equalsIgnoreCase(placa))
                 .findFirst().orElse(null);}
 
-    //_______________ Moto ________________________
-
+    
+    //Metodo para obtener las motos
     public ArrayList<Moto> obtenerMotos(){
         return listaMotos;
     }
 
+    //Metodo para actualizar la moto
     public void actualizarMoto(String placa, Moto motoActualizado){
         for(Moto moto : listaMotos){
             if(moto.getPlaca().equals(placa)){
@@ -467,6 +472,7 @@ public class Concesionario {
                 break;}}}
     
 
+    //Metodo para encontrar una moto
     public Moto encontrarMoto(String placa){
         return listaMotos.stream()
                 .filter(moto -> moto.getPlaca().equalsIgnoreCase(placa))
@@ -474,12 +480,13 @@ public class Concesionario {
                 .orElse(null);}
     
 
-    //_____________________ Deportivo __________________
+    //Metodo para obtener los deportivos
 
     public ArrayList<Deportivo> obtenerDeportivos(){
         return listaDeportivos;
     }
 
+    //Metodo para actualizar el deportivo
     public void actualizarDeportivo(String placa, Deportivo deportivoActualizado){
         for(Deportivo deportivo : listaDeportivos){
             if(deportivo.getPlaca().equals(placa)){
@@ -487,6 +494,7 @@ public class Concesionario {
                 break;}}}
     
 
+    //Metodo para encontrar un deportivo
     public Deportivo encontrarDeportivo(String placa){
         return listaDeportivos.stream()
                 .filter(deportivo -> deportivo.getPlaca().equalsIgnoreCase(placa))
@@ -494,12 +502,13 @@ public class Concesionario {
                 .orElse(null);}
 
 
-    //_________________________ camioneta_____________________
-
+    
+    //Metodo para obtener las camionetas
     public ArrayList<Camioneta> obtenerCamionetas(){
         return listaCamionetas;
     }
 
+    //Metodo para actualizar la camioneta
     public void actualizarCamioneta(String placa, Camioneta camionetaActualizado){
         for(Camioneta camioneta : listaCamionetas){
             if(camioneta.getPlaca().equals(placa)){
@@ -507,6 +516,7 @@ public class Concesionario {
                 break;}}}
     
 
+    //Metodo para encontrar una camioneta
     public Camioneta encontrarCamioneta(String placa){
         return listaCamionetas.stream()
                 .filter(camioneta -> camioneta.getPlaca().equalsIgnoreCase(placa))
@@ -514,19 +524,19 @@ public class Concesionario {
                 .orElse(null);}
 
 
-    //__________________ PickUp_________________
-
+    //Metodo para obtener los PickUps
     public ArrayList<PickUps> obtenerPickUps(){
         return listaPickUps;
     }
 
+    //Metodo para actualizar el PickUp
     public void actualizarPickUp(String placa, PickUps pickUpActualizada){
         for(PickUps pickUp : listaPickUps){
             if(pickUp.getPlaca().equals(placa)){
                 listaPickUps.set(listaPickUps.indexOf(pickUp), pickUpActualizada);
                 break;}}}
     
-
+    //Metodo para encontrar un PickUp
     public PickUps encontrarPickUp(String placa){
         return listaPickUps.stream()
                 .filter(pickUp -> pickUp.getPlaca().equalsIgnoreCase(placa))
@@ -534,38 +544,39 @@ public class Concesionario {
                 .orElse(null);}
 
 
-    //__________________ Vans __________________
-
+    //Metodo para obtener las Vans
     public ArrayList<Vans> obtenerVans(){
         return listaVans;
     }
 
+    //Metodo para actualizar la Van
     public void actualizarVans(String placa, Vans vanActualizada){
         for(Vans vans : listaVans){
             if(vans.getPlaca().equals(placa)){
                 listaVans.set(listaVans.indexOf(vans), vanActualizada);
                 break;}}}
     
-
+    //Metodo para encontrar una Van
     public Vans encontrarVans(String placa){
         return listaVans.stream()
                 .filter(vans -> vans.getPlaca().equalsIgnoreCase(placa))
                 .findFirst()
                 .orElse(null);}
 
-    //__________________ Bus _______________________
+    //Metodo para obtener los Buses
 
     public ArrayList<Bus> obtenerBus(){
         return listaBuses;
     }
 
+    //Metodo para actualizar el Bus
     public void actualizarBus(String placa, Bus busActualizado){
         for(Bus bus : listaBuses){
             if(bus.getPlaca().equals(placa)){
                 listaBuses.set(listaBuses.indexOf(bus), busActualizado);
                 break;}}}
     
-
+    //Metodo para encontrar un Bus
     public Bus encontrarBus(String placa){
         return listaBuses.stream()
                 .filter(bus -> bus.getPlaca().equalsIgnoreCase(placa))
@@ -573,19 +584,20 @@ public class Concesionario {
                 .orElse(null);}
 
 
-    //_________________ Camion _______________________
+    //Metodo para obtener los Camiones
 
     public ArrayList<Camion> obtenerCamiones(){
         return listaCamiones;
     }
 
+    //Metodo para actualizar el Camion
     public void actualizarCamion(String placa, Camion camionActualizado){
         for(Camion camion : listaCamiones){
             if(camion.getPlaca().equals(placa)){
                 listaCamiones.set(listaCamiones.indexOf(camion), camionActualizado);
                 break;}}}
     
-
+    //Metodo para encontrar un Camion
     public Camion encontrarCamion(String placa){
         return listaCamiones.stream()
                 .filter(camion -> camion.getPlaca().equalsIgnoreCase(placa))
@@ -593,7 +605,7 @@ public class Concesionario {
                 .orElse(null);}
     
 
-    //________________ Venta _________________
+    //Metodo para agregar una venta
 
     public void agregarVenta(Venta venta) throws VehiculoException{
         if(venta != null){
@@ -605,6 +617,7 @@ public class Concesionario {
         }
     }
 
+    //Metodo para eliminar una venta
     public void deleteVenta(Venta venta) throws VehiculoException {
         if(!venta.getTipoTransaccion().equals(TipoTransaccion.VENTA)){
             listaVentas.remove(venta);
@@ -615,6 +628,7 @@ public class Concesionario {
         }
     }
 
+    //Metodo para actualizar una venta
     public void actualizarVenta(String id, Venta ventaActualizada) throws VehiculoException{
         if(!ventaActualizada.getTipoTransaccion().equals(TipoTransaccion.VENTA)){
             for(Venta venta : listaVentas){
