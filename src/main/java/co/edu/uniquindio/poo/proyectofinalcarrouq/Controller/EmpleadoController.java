@@ -3,6 +3,7 @@ import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Deportivo;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Cliente;
+<<<<<<< HEAD
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Admin;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Bus;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camion;
@@ -15,6 +16,16 @@ import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Vans;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Venta;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
 import java.net.CacheRequest;
+=======
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camioneta;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Moto;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.PickUps;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Sedan;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Vans;
+
+
+
+>>>>>>> 47469de6156276320d9e3e89706564475efa64ad
 import java.util.ArrayList;
 
 
@@ -88,7 +99,15 @@ public class EmpleadoController {
 
     //Camioneta
     public int addCamioneta(Camioneta camioneta) throws VehiculoException{
+<<<<<<< HEAD
         return modelFactory.addCamioneta(camioneta);
+=======
+        return this.modelFactory.addCamioneta(camioneta);
+    }
+
+    public deleteCamioneta(Camioneta camioneta) throws VehiculoException{
+        return this.modelFactory.deleteCamioneta(camioneta);
+>>>>>>> 47469de6156276320d9e3e89706564475efa64ad
     }
 
     public boolean actualizarCamioneta(String placa, Camioneta camioneta) throws VehiculoException{
@@ -99,6 +118,7 @@ public class EmpleadoController {
         return modelFactory.obtenerCamionetas();
     }
 
+<<<<<<< HEAD
     //Pickup
     public int addPickUp(PickUps pickup) throws VehiculoException{
         return modelFactory.addPickUp(pickup);
@@ -132,6 +152,38 @@ public class EmpleadoController {
 
     public boolean actualizarBus(String placa, Bus bus) throws VehiculoException{
         return modelFactory.actualizarBus(placa, bus);
+=======
+    public int addPickUp(Pickups Pickups) throws VehiculoException{
+        return this.modelFactory.addPickUp(Pickups);
+    }
+
+    public deletePickUp(PickUps pickups) throws VehiculoException{
+        return this.modelFactory.deletePickUp(pickups);
+    }
+
+    public boolean actualizarPickUp(String placa, PickUps pickups) throws VehiculoException{
+        return this.modelFactory.actualizarPickup(pickups);
+    }
+
+    public ArrayList<PickUps> obtenerPicKups(){
+        return this.modelFactory.obtenerPicKups();
+    }
+
+    public int addVan(Vans vans) throws VehiculoException{
+        return this.modelFactory.addVan(vans);
+    }
+
+    public deleteVan(Vans vans) throws VehiculoException{
+        return this.modelFactory.deleteVan(vans);
+    }
+
+    public boolean actualizarVan(String placa, Vans vans) throws VehiculoException{
+        return this.modelFactory.actualizarVan(vans);
+    }
+
+    public ArrayList<Vans> obtenerVan(){
+        return this.modelFactory.obtenerVan();
+>>>>>>> 47469de6156276320d9e3e89706564475efa64ad
     }
 
     public ArrayList<Bus> obtenerBuses(){

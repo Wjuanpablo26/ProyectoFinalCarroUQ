@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="595.0" prefWidth="899.0"
+    xmlns="http://javafx.com/javafx/23"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+    <children>
+
+        <!-- Tabla para mostrar vehículos -->
+        <TableView fx:id="tblVehiculo" layoutX="38.0" layoutY="368.0" prefHeight="200.0" prefWidth="531.0">
+            <columns>
+                <TableColumn fx:id="colPlaca" text="Placa" />
+                <TableColumn fx:id="colModelo" text="Modelo" />
+                <TableColumn fx:id="colMarca" text="Marca" />
+                <TableColumn fx:id="colTipoCambio" prefWidth="108.0" text="Tipo de Cambio" />
+                <TableColumn fx:id="colCombustible" prefWidth="105.5999816894531" text="Combustible" />
+                <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
+            </columns>
+        </TableView>
+        <!-- Primer GridPane con información del vehículo -->
+        <GridPane layoutX="38.0" layoutY="22.0" prefHeight="180.0" prefWidth="259.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" minWidth="10.0" prefWidth="92.00000762939453" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.80001983642578" minWidth="10.0" prefWidth="147.99999237060547" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Placa:" />
+                <TextField fx:id="txtPlaca" GridPane.columnIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Marca:" GridPane.rowIndex="1" />
+                <TextField fx:id="txtMarca" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modelo:" GridPane.rowIndex="2" />
+                <TextField fx:id="txtModelo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo Cambio" GridPane.rowIndex="3" />
+                <ComboBox fx:id="cbxCambio" prefHeight="26.0" prefWidth="160.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Velocidad Max:" GridPane.rowIndex="4" />
+                <TextField fx:id="txtVelocidad" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            </children>
+        </GridPane>
+
+        <!-- GridPane con detalles adicionales del vehículo -->
+        <GridPane layoutX="321.0" layoutY="22.0" prefHeight="180.0" prefWidth="259.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.39996337890625" minWidth="10.0" prefWidth="109.5999755859375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.80001983642578" minWidth="10.0" prefWidth="142.4000244140625" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cilindraje:" />
+                <TextField fx:id="txtCilindraje" GridPane.columnIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Num Pasajeros:" GridPane.rowIndex="1" />
+                <TextField fx:id="txtNumPasajeros" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Num Puertas:" GridPane.rowIndex="2" />
+                <TextField fx:id="txtPuertas" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Capacidad Maletero" GridPane.rowIndex="3" />
+                <TextField fx:id="txtCapacidadMaletero" prefHeight="26.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Es Nuevo?" GridPane.rowIndex="4" />
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdEsNuevoSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="esNuevo" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdEsNuevoNo" mnemonicParsing="false" text="No" toggleGroup="$esNuevo" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+
+        <!-- Sección de Combustible y Opciones dinámicas -->
+        <GridPane layoutX="38.0" layoutY="235.0" prefHeight="26.0" prefWidth="259.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.800048828125" minWidth="10.0" prefWidth="90.39998626708984" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.40003204345703" minWidth="10.0" prefWidth="169.60001373291016" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Combustible:" />
+                <ComboBox fx:id="cbxCombustible" onAction="#onCombustibleChange" prefHeight="26.0" prefWidth="164.0" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+
+        <!-- Controles para combustible eléctrico -->
+        <GridPane fx:id="electricFields" layoutX="38.0" layoutY="283.0" prefHeight="50.0" prefWidth="259.0" visible="false">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.5999755859375" minWidth="10.0" prefWidth="101.59998779296876" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.80001220703122" minWidth="10.0" prefWidth="156.80001220703122" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Duracion Bateria:" />
+                <TextField fx:id="txtDuracionBateria" GridPane.columnIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiempo Carga:" GridPane.rowIndex="1" />
+                <TextField fx:id="txtCargaRapida" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+
+        <!-- Controles para combustible híbrido -->
+        <GridPane fx:id="hybridFields" layoutX="38.0" layoutY="284.0" prefHeight="26.0" prefWidth="259.0" visible="false">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.800048828125" minWidth="10.0" prefWidth="139.8" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.60000610351562" minWidth="10.0" prefWidth="60.800048828125" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Es enchufable?" />
+                <GridPane GridPane.columnIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdEsEnchufableSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="esEnchufable" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdEsEnchufableNo" mnemonicParsing="false" text="No" toggleGroup="$esEnchufable" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+
+        <!-- Controles para combustible híbrido -->
+        <GridPane fx:id="hybridFields2" layoutX="38.0" layoutY="309.0" prefHeight="26.0" prefWidth="259.0" visible="false">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.800048828125" minWidth="10.0" prefWidth="139.8" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.60000610351562" minWidth="10.0" prefWidth="60.800048828125" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Es Hibrido Ligero?" />
+                <GridPane GridPane.columnIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="esHibridoSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="esHibridoLigero" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="esHibridoNo" mnemonicParsing="false" text="No" toggleGroup="$esHibridoLigero" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+        <GridPane layoutX="616.0" layoutY="22.0" prefHeight="30.0" prefWidth="234.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.199951171875" minWidth="10.0" prefWidth="94.5999755859375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.4000244140625" minWidth="10.0" prefWidth="139.4000244140625" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo Vehiculo:" />
+                <ComboBox fx:id="cbxTipoVehiculo" onAction="#onVehiculoChange" prefWidth="150.0" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+
+        <!-- Grind Deportivo -->
+        <GridPane fx:id="Deportivo" layoutX="613.0" layoutY="93.0" prefHeight="142.0" prefWidth="259.0" visible="false">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.4000244140625" minWidth="10.0" prefWidth="116.000048828125" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.9999267578125" minWidth="10.0" prefWidth="119.19995117187499" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bolsa Aire :" />
+                <TextField fx:id="txtBolsaAireDep" GridPane.columnIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Caballos Fuerza:" GridPane.rowIndex="1" />
+                <TextField fx:id="txtCaballosFuerzaDep" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiemp Aceleracion:" GridPane.rowIndex="2" />
+                <TextField fx:id="txtTiempAceleDep" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene Aerodinamica? " GridPane.rowIndex="3" />
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="tieneAerodinamicaSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneAerodinamicaDep" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="tieneAerodinamicaNo" mnemonicParsing="false" text="No" toggleGroup="$tieneAerodinamicaDep" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+
+
+        <!-- Grind VConfort -->
+        <GridPane fx:id="VConfort" layoutX="613.0" layoutY="86.0" prefHeight="222.0" prefWidth="259.0" visible="false">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.4000244140625" minWidth="10.0" prefWidth="148.800048828125" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.60000610351562" minWidth="10.0" prefWidth="111.199951171875" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="99.9999755859375" minHeight="10.0" prefHeight="35.59998779296875" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="179.99999389648437" minHeight="10.0" prefHeight="43.40000610351562" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="179.99999389648437" minHeight="10.0" prefHeight="37.79999389648437" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="179.99999389648437" minHeight="0.0" prefHeight="48.59998168945313" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="179.99999389648437" minHeight="10.0" prefHeight="36.400006103515636" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="179.99999389648437" minHeight="10.0" prefHeight="43.599993896484364" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="0.0" />
+                <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene Aire Acondicionado:" />
+                <GridPane GridPane.columnIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="aireAcondicionadoSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneAireAcon" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="aireAcondicionadoNo" mnemonicParsing="false" text="No" toggleGroup="$tieneAireAcon" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene Cámara Reversa:" GridPane.rowIndex="1" />
+                <GridPane prefHeight="34.0" prefWidth="108.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdCamaraReversaSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneCamara" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdCamaraReversaNo" mnemonicParsing="false" text="No" toggleGroup="$tieneCamara" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene Velocidad Crucero:" GridPane.rowIndex="2" />
+                <GridPane prefHeight="34.0" prefWidth="108.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdVelocidadCruceroSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneVelocidad" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdVelocidadCruceroNo" mnemonicParsing="false" text="No" toggleGroup="$tieneVelocidad" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Bolsas Aires:" GridPane.rowIndex="3" />
+                <TextField fx:id="txtNumBolsasAire" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene  ABS" GridPane.rowIndex="4" />
+                <GridPane prefHeight="34.0" prefWidth="108.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdTieneABSSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneABS" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdTieneABSNo" mnemonicParsing="false" text="No" toggleGroup="$tieneABS" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene 4x4" GridPane.rowIndex="5" />
+                <GridPane prefHeight="34.0" prefWidth="108.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdTiene4X4Si" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tiene4x4" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdTiene4X4No" mnemonicParsing="false" text="No" toggleGroup="$tiene4x4" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+        <GridPane fx:id="VCSegAvanzada" layoutX="616.0" layoutY="322.0" prefHeight="91.0" prefWidth="259.0" visible="false">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.8000732421875" minWidth="10.0" prefWidth="143.0000244140625" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.7999267578125" minWidth="10.0" prefWidth="115.79997558593752" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene Sensores Colision:" />
+                <GridPane GridPane.columnIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdSensorColisionSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneSensorColi" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdSensorColisionNo" mnemonicParsing="false" text="No" toggleGroup="$tieneSensorColi" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene Sensores Trafico:" GridPane.rowIndex="1" />
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="tieneSensorTraficoSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneSensorTraf" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="tieneSensorTraficoNo" mnemonicParsing="false" text="No" toggleGroup="$tieneSensorTraf" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene Asistencia" GridPane.rowIndex="2" />
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdTieneAsistenciaSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneAsistente" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdTieneAsistenciaNo" mnemonicParsing="false" text="No" toggleGroup="$tieneAsistente" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+        <ImageView fx:id="imagenView" fitHeight="108.0" fitWidth="179.0" layoutX="346.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true" />
+
+        <GridPane fx:id="idCapCajaCarga" layoutX="603.0" layoutY="322.0" prefHeight="36.0" prefWidth="259.0" visible="false">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Capacidad Caja Carga" />
+                <TextField fx:id="txtCapacidadCarga" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+        <Button fx:id="btnImagen" layoutX="321.0" layoutY="208.0" mnemonicParsing="false" onAction="#guardarImagen" prefHeight="26.0" prefWidth="114.0" text="Imagen" />
+
+
+        <GridPane fx:id="IdNumEjes" layoutX="615.0" layoutY="322.0" prefHeight="30.0" prefWidth="234.0" visible="false">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Ejes:" />
+                <TextField fx:id="txtNumEjes" prefHeight="26.0" prefWidth="122.0" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+
+
+        <GridPane fx:id="idCamiones" layoutX="613.0" layoutY="93.0" prefHeight="180.0" prefWidth="234.0" visible="false">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.1999755859375" minWidth="10.0" prefWidth="126.19999999999999" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="107.80000000000001" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Capacidad Carga:" />
+                <TextField fx:id="txtCapCargaCam" GridPane.columnIndex="1" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene Acondicionado:" GridPane.rowIndex="1" />
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdAcondicionCamSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneAireAconCam" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdAcondicionCamNo" mnemonicParsing="false" text="No" toggleGroup="$tieneAireAconCam" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene Frenos Aire:" GridPane.rowIndex="2" />
+                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdFrenosAireSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneFrenosAire" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdFrenosAireNo" mnemonicParsing="false" text="No" toggleGroup="$tieneFrenosAire" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiene  ABS" GridPane.rowIndex="3" />
+                <GridPane prefHeight="34.0" prefWidth="108.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <RadioButton fx:id="rdTieneAbsCamSi" mnemonicParsing="false" text="Si">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="tieneABS1Cam" />
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdTieneAbsCamNo" mnemonicParsing="false" text="No" toggleGroup="$tieneABS1Cam" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Ejes:" GridPane.rowIndex="4" />
+                <TextField fx:id="txtNumEjesCam" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo Camiones:" GridPane.rowIndex="5" />
+                <ComboBox fx:id="cbxCamiones" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            </children>
+        </GridPane>
+        <GridPane layoutX="592.0" layoutY="468.0" prefHeight="74.0" prefWidth="301.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.39996337890625" minWidth="10.0" prefWidth="100.79998779296875" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.20001220703125" minWidth="10.0" prefWidth="99.20001220703125" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Button mnemonicParsing="false" onAction="#eventoAgregar" prefHeight="26.0" prefWidth="84.0" text="Agregar" />
+                <Button mnemonicParsing="false" onAction="#eventoEliminar" prefHeight="26.0" prefWidth="88.0" text="Eliminar" GridPane.columnIndex="1" />
+                <Button mnemonicParsing="false" onAction="#eventoActualizar" prefHeight="26.0" prefWidth="87.0" text="Actualizar" GridPane.columnIndex="2" />
+                <Button mnemonicParsing="false" onAction="#eventoLimpiar" prefHeight="26.0" prefWidth="88.0" text="Limpiar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+    </children>
+</AnchorPane>
