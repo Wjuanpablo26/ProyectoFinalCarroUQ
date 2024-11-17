@@ -199,6 +199,26 @@ public class Concesionario {
         .flatMap(Collection::stream).anyMatch(persona -> persona.getCedula().equalsIgnoreCase(cedula));
     }
 
+    //Metodo para buscar una persona por cedula y correo
+    public Persona buscarPersona(String cedula,String correo) {
+        // Buscar en listaEmpleados
+        for (Empleado empleado : listaEmpleados) {
+            if (empleado.getCedula().equals(cedula) && empleado.getCorreo().equals(correo)) {
+                return empleado;
+            }
+        }
+
+        // Buscar en listaAdmin
+        for (Admin asociado : listaAdmins) {
+            if (asociado.getCedula().equals(cedula) && correo.equals(asociado.getCorreo())) {
+                return asociado;
+            }
+        }
+
+        // Si no se encontró en ninguna lista, retorna null
+        return null;
+    }
+
     //Metodos de Logeo de Empleado y Admin
     public int autentificacion(String username,String password){
         if (logeoEmpleado(username,password)){
@@ -314,6 +334,18 @@ public class Concesionario {
         }
     }
 
+    // Método para obtener las ventas de un empleado específico según la cédula
+    public ArrayList<Venta> obtenerVentasPorEmpleado(String cedulaEmpleado) {
+        ArrayList<Venta> ventasEmpleado = new ArrayList<>();
+
+        for (Venta venta : listaVentas) {
+            if (venta.getEmpleado().getCedula().equals(cedulaEmpleado)) {
+                ventasEmpleado.add(venta);
+            }
+        }
+        return ventasEmpleado;
+    }
+
     //metodo para agregar vehiculo
     public void addVehiculo(Vehiculo vehiculo)throws VehiculoException{
         if (vehiculo == null){
@@ -348,7 +380,7 @@ public class Concesionario {
     }
 
     //metodo para remover vehiculo
-    public void removerVehiculo(Vehiculo vehiculo) throws VehiculoException {
+    public void removeVehiculo(Vehiculo vehiculo) throws VehiculoException {
         if (vehiculo == null){
             throw new VehiculoException("Vehiculo Nulo");
         } else if (vehiculo instanceof Sedan){
@@ -565,7 +597,7 @@ public class Concesionario {
 
     //Metodo para obtener los Buses
 
-    public ArrayList<Bus> obtenerBus(){
+    public ArrayList<Bus> obtenerBuses(){
         return listaBuses;
     }
 

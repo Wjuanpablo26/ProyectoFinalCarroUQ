@@ -94,7 +94,7 @@ public class CrudAdmin {
         admin.setGenero(cbxGenero.getValue());
 
         UserName userName = new UserName();
-        userName.setUsername(txtUsername.getText());
+        userName.setUserName(txtUsername.getText());
         userName.setPassword(txtPassword.getText());
         admin.setUserName(userName);
         return admin;

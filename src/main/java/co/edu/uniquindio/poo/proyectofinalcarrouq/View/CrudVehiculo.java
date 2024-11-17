@@ -1,16 +1,30 @@
 package co.edu.uniquindio.poo.proyectofinalcarrouq.View;
 
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Controller.EmpleadoController;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.*;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.TipoCamiones;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.TipoCombustible;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.TipoEstado;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Combustible.*;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.*;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class CrudVehiculo {
     
@@ -36,7 +50,7 @@ public class CrudVehiculo {
     private Button btnImagen;
 
     @FXML
-    private ComboBox<TiposCambios> cbxCambio;
+    private ComboBox<TipoCambios> cbxCambio;
 
     @FXML
     private ComboBox<TipoCamiones> cbxCamiones;
@@ -60,7 +74,7 @@ public class CrudVehiculo {
     private TableColumn<Vehiculo, String> colPlaca;
 
     @FXML
-    private TableColumn<Vehiculo, TiposCambios> colTipoCambio;
+    private TableColumn<Vehiculo, TipoCambios> colTipoCambio;
 
     @FXML
     private TableColumn<Vehiculo, TipoEstado> colEstado;

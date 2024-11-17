@@ -1,29 +1,17 @@
 package co.edu.uniquindio.poo.proyectofinalcarrouq.Controller;
 
 import java.util.ArrayList;
-
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Admin;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Bus;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camion;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camioneta;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Empleado;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Moto;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.PickUps;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Concesionario;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Deportivo;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Cliente;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.*;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Persona;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Sedan;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Vans;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Venta;
+import java.io.IOException;
 
 
 public class ModelFactory {
 
-    Concesionario consecionario;
+    Concesionario concesionario;
     private Admin admin;
     private Empleado empleado;
 
@@ -59,12 +47,12 @@ public class ModelFactory {
             case 1:
                 
                 empleado= concesionario.obtenerEmpleadoUsername(username, password);
-                System.out.println("\nEl empleado con CC: " +empleado.getCedula()+" ingresó");
+                System.out.println("\nEl empleado con CC: " +empleado.getCedula()+" ingreso");
                 return 1;
 
             case 2:
                 admin = concesionario.obtenerAdminUsername(username, password);
-                System.out.println("\nEl admin con CC: "+admin.getCedula()+" ingresó");
+                System.out.println("\nEl admin con CC: "+admin.getCedula()+" ingreso");
                 return 2;
         
             default:
@@ -100,7 +88,15 @@ public class ModelFactory {
         return 2;}
     }
 
-    public boolean actualizaeEmpleado(String cedula, Empleado empleado) throws PersonaException{
+    public int deleteEmpleado(Empleado empleado) throws PersonaException {
+        if (empleado != null) {
+            concesionario.removePersona(empleado);
+            salvarDatos();
+            return 1;
+        }else{
+        return 2;}}
+
+    public boolean actualizarEmpleado(String cedula, Empleado empleado) throws PersonaException{
         if (empleado != null){
             concesionario.actualizarEmpleado(cedula, empleado);
             salvarDatos();
@@ -156,12 +152,14 @@ public class ModelFactory {
     public int addAdmin(Admin admin) throws PersonaException{
         if (concesionario.personaExiste(admin.getCorreo(), admin.getCedula())){
             concesionario.addPersona(admin);
+            salvarDatos();
+            return 1;
         }else{
-            return 2;
+        return 2;
         }
     }
 
-    public int delete(Admin admin) throws PersonaException{
+    public int deleteAdmin(Admin admin) throws PersonaException{
         if (admin != null){
             concesionario.removePersona(admin);
             salvarDatos();
@@ -198,7 +196,7 @@ public class ModelFactory {
 
     //Métodos del Sedan
     public int addSedan(Sedan sedan) throws VehiculoException{
-        if (seda != null){
+        if (sedan != null){
             if (!concesionario.carroExiste(sedan.getPlaca())){
                 concesionario.addVehiculo(sedan);
                 return 1;
@@ -221,7 +219,7 @@ public class ModelFactory {
     }
 
     public ArrayList<Sedan> obtenerSedans(){
-        return  concesionario.obtenerSedans();
+        return concesionario.obtenerSedans();
     }
 
     //Métodos de la Moto
@@ -248,7 +246,7 @@ public class ModelFactory {
         }
     }
 
-    public ArrayList<Moto> obbtenerMotos(){
+    public ArrayList<Moto> obtenerMotos(){
         return concesionario.obtenerMotos();
     }
 
@@ -297,8 +295,8 @@ public class ModelFactory {
     }
 
     public boolean actualizarCamioneta(String placa, Camioneta camionetas) throws VehiculoException {
-        if (camioneta != null) {
-            concesionario.actualizarCamioneta(placa, camioneta);
+        if (camionetas != null) {
+            concesionario.actualizarCamioneta(placa, camionetas);
             salvarDatos();
             return true;
         } else {
@@ -336,7 +334,7 @@ public class ModelFactory {
     }
 
     public ArrayList<PickUps> obtenerPickUps(){
-        return concesioanrio.obtenerPickUps();
+        return concesionario.obtenerPickUps();
     }
 
     //Métodos de las Vans
@@ -356,7 +354,7 @@ public class ModelFactory {
 
     public boolean actualizarVans(String placa, Vans vans) throws VehiculoException {
         if (vans != null) {
-            concesionario.actualizarVan(placa, vans);
+            concesionario.actualizarVans(placa, vans);
             salvarDatos();
             return true;
         } else {
@@ -369,16 +367,16 @@ public class ModelFactory {
     }
 
     //Métodos de los Buses
-    public int addBus(String placa, Bus bus) throws VehiculoException{
-        if (bus!= null){
-            if (!concesionario.carroExiste(bus.getPlaca())){
-                concesionario.addVehiculo(bus);
+    public int addBuses(Bus buses) throws VehiculoException {
+        if (buses != null) {
+            if (!concesionario.carroExiste(buses.getPlaca())) {
+                concesionario.addVehiculo(buses);
                 salvarDatos();
                 return 1;
-            }else{
+            } else {
                 return 2;
             }
-        }else{
+        } else {
             return 0;
         }
     }
@@ -401,7 +399,7 @@ public class ModelFactory {
     public int addCamiones(Camion camion)throws VehiculoException{
         if (camion!=null){
             if(!concesionario.carroExiste(camion.getPlaca())){
-                concesionario.addVehiculo(camion):
+                concesionario.addVehiculo(camion);
                 salvarDatos();
                 return 1;
             }else{
@@ -427,7 +425,7 @@ public class ModelFactory {
     }
 
      //Métodos de las Ventas
-     public int addVenta(Venta venta) throws VehiculoException {
+    public int addVenta(Venta venta) throws VehiculoException {
         if (venta != null){
             concesionario.agregarVenta(venta);
             salvarDatos();

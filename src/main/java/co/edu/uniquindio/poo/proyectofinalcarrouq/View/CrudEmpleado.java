@@ -133,7 +133,7 @@ public class CrudEmpleado {
         empleado.setFechaContratacion(dtFechaCont.getValue());
 
         UserName userName = new UserName();
-        userName.setUsername(txtUsername.getText());
+        userName.setUserName(txtUsername.getText());
         userName.setPassword(txtPassword.getText());
 
         empleado.setUserName(userName);
