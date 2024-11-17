@@ -3,6 +3,14 @@ package co.edu.uniquindio.poo.proyectofinalcarrouq.Controller;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Deportivo;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Cliente;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camioneta;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Moto;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.PickUps;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Sedan;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Vans;
+
+
 
 import java.util.ArrayList;
 
@@ -82,7 +90,7 @@ public class EmpleadoController {
     }
 
     public deleteCamioneta(Camioneta camioneta) throws VehiculoException{
-        returns this.modelFactory.deleteCamioneta(camioneta);
+        return this.modelFactory.deleteCamioneta(camioneta);
     }
 
     public boolean actualizarCamioneta(String placa, Camioneta camioneta) throws VehiculoException{
@@ -93,35 +101,35 @@ public class EmpleadoController {
         return this.modelFactory.obtenerCamionetas();
     }
 
-    public int addPickUp(Pickup pickup) throws VehiculoException{
-        return this.modelFactory.addPickUp(pickup);
+    public int addPickUp(Pickups Pickups) throws VehiculoException{
+        return this.modelFactory.addPickUp(Pickups);
     }
 
-    public deletePickUp(PickUp pickup) throws VehiculoException{
-        return this.modelFactory.deletePickUp(pickup);
+    public deletePickUp(PickUps pickups) throws VehiculoException{
+        return this.modelFactory.deletePickUp(pickups);
     }
 
-    public boolean actualizarPickUp(String placa, PickUp pickup) throws VehiculoException{
-        return this.modelFactory.actualizarPickup(pickup);
+    public boolean actualizarPickUp(String placa, PickUps pickups) throws VehiculoException{
+        return this.modelFactory.actualizarPickup(pickups);
     }
 
-    public ArrayList<PickUp> obtenerPicKups(){
+    public ArrayList<PickUps> obtenerPicKups(){
         return this.modelFactory.obtenerPicKups();
     }
 
-    public int addVan(Van van) throws VehiculoException{
-        return this.modelFactory.addVan(van);
+    public int addVan(Vans vans) throws VehiculoException{
+        return this.modelFactory.addVan(vans);
     }
 
-    public deleteVan(Van van) throws VehiculoException{
-        return this.modelFactory.deleteVan(van);
+    public deleteVan(Vans vans) throws VehiculoException{
+        return this.modelFactory.deleteVan(vans);
     }
 
-    public boolean actualizarVan(String placa, Van van) throws VehiculoException{
-        return this.modelFactory.actualizarVan(van);
+    public boolean actualizarVan(String placa, Vans vans) throws VehiculoException{
+        return this.modelFactory.actualizarVan(vans);
     }
 
-    public ArrayList<Van> obtenerVan(){
+    public ArrayList<Vans> obtenerVan(){
         return this.modelFactory.obtenerVan();
     }
 
