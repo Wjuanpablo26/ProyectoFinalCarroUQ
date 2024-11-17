@@ -45,8 +45,8 @@
 
         <GridPane layoutX="92.0" layoutY="26.0"     prefHeight="122.0" prefWidth="242.0">
             <columnConstraints>
-                <columnConstraints hgrow="SOMETIMES" maxWidth="95.2" mindWidth="10.0" prefWidth="56.8" />
-                <columnConstraints hgrow="SOMETIMES" maxWidth="143.2" mindWidth="10.0" prefWidth="143.2" />
+                <columnConstraints hgrow="SOMETIMES" maxWidth="95.2" minWidth="10.0" prefWidth="56.8" />
+                <columnConstraints hgrow="SOMETIMES" maxWidth="143.2" minWidth="10.0" prefWidth="143.2" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -68,8 +68,8 @@
 
         <GridPane layoutX="440.0" layoutY="26.0" prefHeight="122.0" prefWidth="280.0">
             <columnConstraints>
-                <columnConstraints hgrow="SOMETIMES" maxWidth="132.8" mindWidth="10.0" prefWidth="116.8" />
-                <columnConstraints hgrow="SOMETIMES" maxWidth="143.2" mindWidth="10.0" prefWidth="84.8" />
+                <columnConstraints hgrow="SOMETIMES" maxWidth="132.8" minWidth="10.0" prefWidth="116.8" />
+                <columnConstraints hgrow="SOMETIMES" maxWidth="143.2" minWidth="10.0" prefWidth="84.8" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

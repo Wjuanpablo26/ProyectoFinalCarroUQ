@@ -29,10 +29,10 @@
                 </TableView>
             <GridPane layoutX="213.0" layoutY="196.0" prefHeight="30.0" prefWidth="454.0">
                 <columnConstraints>
-                    <columnConstraints hgrow="SOMETIMES" maxWidth="123.4000244140625" mindWidth="10.0" prefWidth="114.6"/>
-                    <columnConstraints hgrow="SOMETIMES" maxWidth="127.1999755859375" mindWidth="10.0" prefWidth="108.20000000000002"/>
-                        <columnConstraints hgrow="SOMETIMES" maxWidth="132.0000244140625" mindWidth="10.0" prefWidth="120.00002441406252"/>
-                        <columnConstraints hgrow="SOMETIMES" maxWidth="115.19997558593752" mindWidth="10.0" prefWidth="111.19997558593752"/>
+                    <columnConstraints hgrow="SOMETIMES" maxWidth="123.4000244140625" minWidth="10.0" prefWidth="114.6"/>
+                    <columnConstraints hgrow="SOMETIMES" maxWidth="127.1999755859375" minWidth="10.0" prefWidth="108.20000000000002"/>
+                        <columnConstraints hgrow="SOMETIMES" maxWidth="132.0000244140625" minWidth="10.0" prefWidth="120.00002441406252"/>
+                        <columnConstraints hgrow="SOMETIMES" maxWidth="115.19997558593752" minWidth="10.0" prefWidth="111.19997558593752"/>
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -48,8 +48,8 @@
             </GridPane>
             <GridPane layoutX="133.0" layoutY="26.0" prefHeight="122.0" prefWidth="242.0">
                 <columnConstraints>
-                    <columnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" mindWidth="10.0" prefWidth="56.79998779296875" />
-                    <columnConstraints hgrow="SOMETIMES" maxWidth="143.20001220703125" mindWidth="10.0" prefWidth="143.20001220703125" />
+                    <columnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" minWidth="10.0" prefWidth="56.79998779296875" />
+                    <columnConstraints hgrow="SOMETIMES" maxWidth="143.20001220703125" minWidth="10.0" prefWidth="143.20001220703125" />
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
