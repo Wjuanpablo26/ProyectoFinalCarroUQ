@@ -33,7 +33,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
@@ -41,9 +40,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-=======
 import javafx.scene.control.*;
->>>>>>> 9750d199b337faad619f7a0a778df4145845fe56
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -318,7 +315,6 @@ public class CrudVehiculo {
     ObservableList<Vehiculo> listaVehiculo = FXCollections.observableArrayList();
     private File imagenSeleccionada;
 
-<<<<<<< HEAD
 
 
 
@@ -612,14 +608,13 @@ public class CrudVehiculo {
         }
     }
     
-=======
     @FXML
     public void initialize(){
         empleadoController = new EmpleadoController();
         initView();
         obtenervehiculos();
         tblVehiculo.getItems().clear();
-        tblVehiculo.setItems(lsitaVehiculo);
+        tblVehiculo.setItems(listaVehiculo);
         selection();
     }
 
@@ -1069,5 +1064,4 @@ public class CrudVehiculo {
             mensajeError("Error en la creación", "Los campos no están completos")
         }
     }
->>>>>>> d776bede6662fc86e4e876bd9b2f00e59c046dbd
 }
