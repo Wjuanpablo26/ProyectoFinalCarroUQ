@@ -1,5 +1,8 @@
 package co.edu.uniquindio.poo.proyectofinalcarrouq.Controller;
 
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Persona;
+
+
 public class LogginController {
     ModelFactory modelFactory;
 

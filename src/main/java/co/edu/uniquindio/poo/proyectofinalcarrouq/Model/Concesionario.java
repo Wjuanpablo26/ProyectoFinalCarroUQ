@@ -5,6 +5,7 @@ import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Persona;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.TipoTransaccion;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Stream;

@@ -7,7 +7,7 @@ public class Electrico extends Combustible {
     private int tiempoCarga;
 
     //Constructor
-    public Electrico(int autonomia, int tiempoCarga, TipoCombustible TipoCombustible) {
+    public Electrico(TipoCombustible TipoCombustible, int autonomia, int tiempoCarga) {
         super(TipoCombustible);
         this.autonomia = autonomia;
         this.tiempoCarga = tiempoCarga;

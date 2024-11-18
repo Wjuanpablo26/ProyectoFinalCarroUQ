@@ -6,6 +6,8 @@ import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.*;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Persona;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Utils.Persistencia;
+
 import java.io.IOException;
 
 
@@ -459,6 +461,58 @@ public class ModelFactory {
         return concesionario.obtenerVentasPorEmpleado(cedula);
     }
 
+    //Metodos de la persistencia para salvar los datos
+    public void salvarDatos(){
+        try {
+            Persistencia.guardarEmpleados(getConcesionario().obtenerEmpleados());
+            Persistencia.guardarAdministradores(getConcesionario().obtenerAdmins());
+            Persistencia.guardarClientes(getConcesionario().obtenerClientes());
+            Persistencia.guardarSedanes(getConcesionario().obtenerSedans());
+            Persistencia.guardarMotos(getConcesionario().obtenerMotos());
+            Persistencia.guardarDeportivos(getConcesionario().obtenerDeportivos());
+            Persistencia.guardarCamionetas(getConcesionario().obtenerCamionetas());
+            Persistencia.guardarPickUps(getConcesionario().obtenerPickUps());
+            Persistencia.guardarVans(getConcesionario().obtenerVans());
+            Persistencia.guardarBuses(getConcesionario().obtenerBuses());
+            Persistencia.guardarCamiones(getConcesionario().obtenerCamiones());
+            Persistencia.guardarVentas(getConcesionario().obtenerVentas());
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //Metodo de la persistencia para cargar los datos
+    public void cargarDatos(){
+
+        try {
+            getConcesionario().getListaEmpleados().addAll(Persistencia.cargarEmpleados());
+            getConcesionario().getListaAdmins().addAll(Persistencia.cargarAdministradores());
+            getConcesionario().getListaClientes().addAll(Persistencia.cargarClientes());
+            getConcesionario().getListaSedanes().addAll(Persistencia.cargarSedanes());
+            getConcesionario().getListaMotos().addAll(Persistencia.cargarMotos());
+            getConcesionario().getListaDeportivos().addAll(Persistencia.cargarDeportivos());
+            getConcesionario().getListaCamionetas().addAll(Persistencia.cargarCamionetas());
+            getConcesionario().getListaPickUps().addAll(Persistencia.cargarPickUps());
+            getConcesionario().getListaVans().addAll(Persistencia.cargarVans());
+            getConcesionario().getListaBuses().addAll(Persistencia.cargarBuses());
+            getConcesionario().getListaCamiones().addAll(Persistencia.cargarCamiones());
+            ArrayList<Vehiculo> vehiculosUnificadas = new ArrayList<>();
+            vehiculosUnificadas.addAll(getConcesionario().obtenerSedans());
+            vehiculosUnificadas.addAll(getConcesionario().obtenerCamiones());
+            vehiculosUnificadas.addAll(getConcesionario().obtenerVans());
+            vehiculosUnificadas.addAll(getConcesionario().obtenerBuses());
+            vehiculosUnificadas.addAll(getConcesionario().obtenerCamionetas());
+            vehiculosUnificadas.addAll(getConcesionario().obtenerPickUps());
+            vehiculosUnificadas.addAll(getConcesionario().obtenerDeportivos());
+            vehiculosUnificadas.addAll(getConcesionario().obtenerMotos());
+            getConcesionario().getListaVentas().addAll(Persistencia.cargarVentas(obtenerClientes(),vehiculosUnificadas,obtenerEmpleados()));
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }

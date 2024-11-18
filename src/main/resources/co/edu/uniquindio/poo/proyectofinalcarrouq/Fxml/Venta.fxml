@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="514.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<AnchorPane prefHeight="514.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.proyectofinalcarrouq.View.VentaViewController">
     <!-- ComboBox -->
     <ComboBox fx:id="cbxVehiculos" layoutX="20" layoutY="20" onAction="#onVehiculoChange" prefWidth="200" promptText="Vehiculos">
         <items>
