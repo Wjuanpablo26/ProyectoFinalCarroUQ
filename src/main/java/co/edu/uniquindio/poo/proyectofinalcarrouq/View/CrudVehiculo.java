@@ -1,46 +1,17 @@
 package co.edu.uniquindio.poo.proyectofinalcarrouq.View;
 
-<<<<<<< HEAD
-import java.io.File;
-
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Controller.EmpleadoController;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Bus;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camion;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camioneta;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Deportivo;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Moto;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.PickUps;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Sedan;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Vans;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Combustible.Electrico;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Combustible.Hibrido;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.TipoCamiones;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.TipoCombustible;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.TipoEstado;
-=======
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Controller.EmpleadoController;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.*;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Combustible.*;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.*;
+import co.edu.uniquindio.poo.proyectofinalcarrouq   .Model.Enum.*;
 import javafx.beans.property.SimpleObjectProperty;
->>>>>>> 9750d199b337faad619f7a0a778df4145845fe56
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-<<<<<<< HEAD
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -316,305 +287,11 @@ public class CrudVehiculo {
     ObservableList<Vehiculo> listaVehiculo = FXCollections.observableArrayList();
     private File imagenSeleccionada;
 
-<<<<<<< HEAD
-
-
-
-
-
-
-    //Metodo para crear un vehiculo
-    private Vehiculo crearVehiculo(String vehiculo){
-
-        switch (vehiculo) {
-            //Caso para crear un vehiculo moto
-            case "Motos":
-                Moto moto = new Moto();
-                moto.setPlaca(txtPlaca.getText());
-                moto.setMarca(txtMarca.getText());
-                moto.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
-                moto.setModelo(txtModelo.getText());
-                moto.setTiposCambios(cbxCambio.getValue());
-                moto.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
-                moto.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
-                moto.setCombustible(crearCombustible());
-                return moto;
-        
-            //Caso para crear un vehiculo sedan
-            case "Sedan":
-                Sedan sedan = new Sedan();
-
-                sedan.setPlaca(txtPlaca.getText());
-                sedan.setMarca(txtMarca.getText());
-                sedan.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
-                sedan.setModelo(txtModelo.getText());
-                sedan.setTiposCambios(cbxCambio.getValue());
-                sedan.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
-                sedan.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
-                sedan.setCombustible(crearCombustible());
-                sedan.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
-                sedan.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
-                sedan.setCapacidadMaletero(Float.parseFloat(txtCapacidadMaletero.getText()));
-                sedan.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
-                sedan.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
-                sedan.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
-                sedan.setTieneVelocidadCrucero(tieneVelocidad.getSelectedToggle().equals(rdVelocidadCruceroSi));
-                sedan.setTieneSensorColision(tieneSensorColi.getSelectedToggle().equals(rdSensorColisionSi));
-                sedan.setTieneSensorTraficoCruzado(tieneSensorTraf.getSelectedToggle().equals(tieneSensorTraficoSi));
-                sedan.setTieneAsistentePermanencia(tieneAsistente.getSelectedToggle().equals(rdTieneAsistenciaSi));
-                sedan.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
-                return sedan;
-
-            //Caso para crear un vehiculo deportivo
-            case "Deportivo":
-                Deportivo deportivo = new Deportivo();
-                deportivo.setPlaca(txtPlaca.getText());
-                deportivo.setMarca(txtMarca.getText());
-                deportivo.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
-                deportivo.setModelo(txtModelo.getText());
-                deportivo.setTiposCambios(cbxCambio.getValue());
-                deportivo.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
-                deportivo.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
-                deportivo.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
-                deportivo.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
-                deportivo.setCombustible(crearCombustible());
-                deportivo.setNumBolsasAire(Integer.parseInt(txtBolsaAireDep.getText()));
-                deportivo.setNumCaballosFuerza(Integer.parseInt(txtCaballosFuerzaDep.getText()));
-                deportivo.setTiempoAceleracion(Double.parseDouble(txtTiempAceleDep.getText()));
-                deportivo.setTieneAerodinamicaMejorada(tieneAerodinamicaDep.getSelectedToggle().equals(tieneAerodinamicaSi));
-                return deportivo;
-
-            //Caso para crear un vehiculo Camioneta
-            case "Camionetas":
-                Camioneta camioneta = new Camioneta();
-                camioneta.setPlaca(txtPlaca.getText());
-                camioneta.setMarca(txtMarca.getText());
-                camioneta.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
-                camioneta.setModelo(txtModelo.getText());
-                camioneta.setTiposCambios(cbxCambio.getValue());
-                camioneta.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
-                camioneta.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
-                camioneta.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
-                camioneta.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
-                camioneta.setCapacidadMaletero(Float.parseFloat(txtCapacidadMaletero.getText()));
-                camioneta.setCombustible(crearCombustible());
-                camioneta.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
-                camioneta.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
-                camioneta.setTieneVelocidadCrucero(tieneVelocidad.getSelectedToggle().equals(rdVelocidadCruceroSi));
-                camioneta.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
-                camioneta.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
-                camioneta.setEs4x4(tiene4x4.getSelectedToggle().equals(rdTiene4X4Si));
-                camioneta.setTieneSensorColision(tieneSensorColi.getSelectedToggle().equals(rdSensorColisionSi));
-                camioneta.setTieneSensorTraficoCruzado(tieneSensorTraf.getSelectedToggle().equals(tieneSensorTraficoSi));
-                camioneta.setTieneAsistentePermanencia(tieneAsistente.getSelectedToggle().equals(rdTieneAsistenciaSi));
-                return camioneta;
-
-            //Caso para crear un vehiculo PickUps
-            case "PickUps":
-                PickUps pickUp = new PickUps();
-                pickUp.setPlaca(txtPlaca.getText());
-                pickUp.setMarca(txtMarca.getText());
-                pickUp.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
-                pickUp.setModelo(txtModelo.getText());
-                pickUp.setTiposCambios(cbxCambio.getValue());
-                pickUp.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
-                pickUp.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
-                pickUp.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
-                pickUp.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
-                pickUp.setCapacidadCajaCarga(Float.parseFloat(txtCapacidadCarga.getText()));
-                pickUp.setCombustible(crearCombustible());
-                pickUp.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
-                pickUp.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
-                pickUp.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
-                pickUp.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
-                pickUp.setEs4x4(tiene4x4.getSelectedToggle().equals(rdTiene4X4Si));
-                return pickUp;
-
-            //Caso para crear un vehiculo Vans
-            case "Vans":
-                Vans vans = new Vans();
-                vans.setPlaca(txtPlaca.getText());
-                vans.setMarca(txtMarca.getText());
-                vans.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
-                vans.setModelo(txtModelo.getText());
-                vans.setTiposCambios(cbxCambio.getValue());
-                vans.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
-                vans.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
-                vans.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
-                vans.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
-                vans.setCapacidadMaletero(Float.parseFloat(txtCapacidadMaletero.getText()));
-                vans.setCombustible(crearCombustible());
-                vans.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
-                vans.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
-                vans.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
-                vans.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
-                return vans;
-
-            //Caso para crear un vehiculo Bus
-            case "Buses":
-                Bus buses = new Bus();
-                buses.setPlaca(txtPlaca.getText());
-                buses.setMarca(txtMarca.getText());
-                buses.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
-                buses.setModelo(txtModelo.getText());
-                buses.setTiposCambios(cbxCambio.getValue());
-                buses.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
-                buses.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
-                buses.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
-                buses.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
-                buses.setCapacidadMaletero(Float.parseFloat(txtCapacidadMaletero.getText()));
-                buses.setNumEjes(Integer.parseInt(txtNumEjes.getText()));
-                buses.setCombustible(crearCombustible());
-                buses.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
-                buses.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
-                buses.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
-                buses.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
-                return buses;
-
-            //Caso para crear un vehiculo Camion
-            case "Camiones":
-                Camion camiones = new Camion();
-                camiones.setPlaca(txtPlaca.getText());
-                camiones.setMarca(txtMarca.getText());
-                camiones.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
-                camiones.setModelo(txtModelo.getText());
-                camiones.setTiposCambios(cbxCambio.getValue());
-                camiones.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
-                camiones.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
-                camiones.setCapCarga(Float.parseFloat(txtCapCargaCam.getText()));
-                camiones.setTieneAireAcondicionado(tieneAireAconCam.getSelectedToggle().equals(rdAcondicionCamSi));
-                camiones.setTieneFrenosAire(tieneFrenosAire.getSelectedToggle().equals(rdFrenosAireSi));
-                camiones.setTieneABS(tieneABS1Cam.getSelectedToggle().equals(rdTieneAbsCamSi));
-                camiones.setNumeroEjes(Integer.parseInt(txtNumEjesCam.getText()));
-                camiones.setTipoCamion(cbxCamiones.getValue());
-                camiones.setCombustible(crearCombustible());
-                return camiones;
-
-            //Default para retornar null
-            default:
-                return null;
-        }
-    }
-
-    //Evento para eliminar un vehiculo
-    @FXML
-    void eventoEliminar(ActionEvent event) throws VehiculoException{
-        Vehiculo vehiculo = tblVehiculo.getSelectionModel().getSelectedItem();
-        String ruta;
-        if(!vehiculo.getImagen().equals("src/main/resources/Images/404.jpg")){
-            ruta = vehiculo.getImagen();
-        }else{
-            ruta = "";
-        }
-
-        if (vehiculo != null) {
-            if (empleadoController.removerVehiculo(vehiculo) == 1) {
-                eliminarImagenProducto(ruta);
-
-                mensajeInformacion("Vehiculo Eliminado", "EL Vehiculo se ha eliminado con exito");
-                limpiarCampos();
-                listaVehiculo.clear();
-                obtenerVehiculos();
-                tblVehiculo.refresh();
-            } else {
-                mensajeError("Vehiculo no Elimnado", "El Admin no se ah eliminado");
-            }
-        } else {
-            mensajeError("Vehiculo no seleccionado", "Seleccione un vehiculo para continuar con la eliminicacion");
-        }
-    }
-
-    //Metodo para el evento de limpiar campos
-    @FXML
-    void eventoLimpiar(ActionEvent event) {
-        limpiarCampos();
-    }
-
-    //evento para guardar una imagen
-    @FXML
-    void guardarImagen(ActionEvent event){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Seleccione una imagen");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.jpeg", "*.png", "*.gif")
-        );
-
-        // Obtener la ventana principal para que el diálogo se abra en el contexto adecuado
-        Stage stage = (Stage) imagenView.getScene().getWindow();
-        imagenSeleccionada = fileChooser.showOpenDialog(stage);
-
-        if (imagenSeleccionada!= null) {
-            // Mostrar la imagen seleccionada en el ImageView
-            imagenView.setImage(new Image(imagenSeleccionada.toURI().toString()));
-        }
-    }
-
-    //Metodo para copiar la imagen de un vehiculo
-    public void copiarImagenAdmin(File archivoImagen,Vehiculo vehiculo){
-        String carpetaDestino = "src/main/resources/Images";
-        String extension = getExtension(archivoImagen.getName());
-        Path destino = Path.of(carpetaDestino, vehiculo.getPlaca() + "." + extension);
-
-        try {
-            // Copiar la imagen al destino
-            Files.copy(archivoImagen.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
-
-            // Actualizar la ruta de la imagen en el objeto Producto
-            vehiculo.setImagen(destino.toString());
-            System.out.println("Imagen copiada en: " + destino.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //Metodo para obtener la extension de un archivo
-    private String getExtension(String nombreArchivo) {
-        int i = nombreArchivo.lastIndexOf('.');
-        return (i > 0) ? nombreArchivo.substring(i + 1) : "";
-    }
-
-    //Metodo para eliminar la imagen
-    private void eliminarImagenProducto(String rutaImagen) {
-        try {
-            Path path = Paths.get(rutaImagen);
-            Files.deleteIfExists(path); // Elimina el archivo si existe
-        } catch (IOException e) {}
-    }
-
-    //Metodo para crear un combustible
-    private Combustible crearCombustible(){
-        String tipo = cbxCombustible.getValue().toString();
-        switch (tipo) {
-            case "ELECTRICO":
-                Electrico electrico = new Electrico(TipoCombustible.ELECTRICO);
-                electrico.setAutonomia(Integer.parseInt(txtDuracionBateria.getText()));
-                electrico.setTiempoCarga(Integer.parseInt(txtCargaRapida.getText()));
-                return electrico;
-            case "HIBRIDO":
-                Hibrido hibrido = new Hibrido(TipoCombustible.HIBRIDO);
-                boolean enchufable = esEnchufable.getSelectedToggle().equals(rdEsEnchufableSi);
-                hibrido.setEsEnchufable(enchufable);
-                if (enchufable) {
-                    hibrido.setEsHibridoLigero(false);
-                }else{
-                    boolean esHibrido = esHibridoLigero.getSelectedToggle().equals(esHibridoSi);
-                    hibrido.setEsHibridoLigero(esHibrido);
-                }
-                return hibrido;
-            case "DIESEL":
-                return new Diesel(TipoCombustible.DIESEL);
-            case "GASOLINA":
-                return new Gasolina(TipoCombustible.GASOLINA);
-            default:
-                return null;
-        }
-    }
-    
     @FXML
     public void initialize(){
         empleadoController = new EmpleadoController();
         initView();
-        obtenervehiculos();
+        obtenerVehiculos();
         tblVehiculo.getItems().clear();
         tblVehiculo.setItems(listaVehiculo);
         selection();
@@ -628,13 +305,13 @@ public class CrudVehiculo {
 
         colMarca.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMarca()));
 
-        colTipoCambio.setCellValueFactory(cellData -> new SimpleStringProperty<>(cellData.getValue().getCombustible().getTipoCombustible()));
+        colTipoCambio.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiposCambios()));
 
-        colCombustible.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCombustible().getTipoCombustible()));
+        colCombustible.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getCombustible().getTipoCombustible()));
 
-        colEstado.setCellValueFactory(cellData -> new SimpleStringProperty<>(cellData.getValue().getTipoEstado()));
+        colEstado.setCellValueFactory(cellData -> new  SimpleObjectProperty<>(cellData.getValue().getTipoEstado()));
 
-        cbxCambio.setItems(FXCollections.observableArrayList(TiposCambios.values()));
+        cbxCambio.setItems(FXCollections.observableArrayList(TipoCambios.values()));
 
         cbxTipoVehiculo.getItems().addAll("Sedan", "Moto", "Deportivo", "Camioneta", "PickUps", "Vans", "Bus", "Camion");
 
@@ -647,13 +324,13 @@ public class CrudVehiculo {
     }
 
     //Método para añadir y obtener los vehículos a la lista
-    private void obtenervehiculos(){
+    private void obtenerVehiculos(){
         listaVehiculo.addAll(empleadoController.obtenerSedans());
         listaVehiculo.addAll(empleadoController.obtenerMotos());
         listaVehiculo.addAll(empleadoController.obtenerDeportivos());
         listaVehiculo.addAll(empleadoController.obtenerCamionetas());
         listaVehiculo.addAll(empleadoController.obtenerPicKups());
-        listaVehiculo.addAll(empleadoController.obtenerVans());
+        listaVehiculo.addAll(empleadoController.obtenerVan());
         listaVehiculo.addAll(empleadoController.obtenerBuses());
         listaVehiculo.addAll(empleadoController.obtenerCamiones());
     }
@@ -966,7 +643,7 @@ public class CrudVehiculo {
                     }
                 } else if (vehiculoActualizado instanceof PickUps) {
                     PickUps pickUps = (PickUps) vehiculoActualizado;
-                    if (empleadoController.actualizarPickups(vehiculoAntiguo.getPlaca(),pickUps)){
+                    if (empleadoController.actualizarPickUp(vehiculoAntiguo.getPlaca(),pickUps)){
                         mensajeInformacion("Vehículo actualizado","El vehículo se ha actualizado con éxito");
                         limpiarCampos();
                         listaVehiculo.clear();
@@ -1044,7 +721,7 @@ public class CrudVehiculo {
             } else if (vehiculo instanceof Camioneta) {
                 exito = (empleadoController.addCamioneta((Camioneta) vehiculo) == 1);
             } else if (vehiculo instanceof PickUps) {
-                exito = (empleadoController.addPickups((PickUps) vehiculo) == 1);
+                exito = (empleadoController.addPickUp((PickUps) vehiculo) == 1);
             } else if (vehiculo instanceof Vans) {
                 exito = (empleadoController.addVan((Vans) vehiculo) == 1);
             } else if (vehiculo instanceof Bus) {
@@ -1057,7 +734,7 @@ public class CrudVehiculo {
                 mensajeInformacion("Creación completada", "Se creó el "+ tipoVehiculo+ " correctamente");
                 limpiarCampos();
                 listaVehiculo.clear();
-                obtenervehiculos();
+                obtenerVehiculos();
                 tblVehiculo.refresh();
             }else{
                 mensajeError("Error en la creación", "Los datos son inválidos o ya fueron utilizados");
@@ -1066,5 +743,496 @@ public class CrudVehiculo {
             mensajeError("Error en la creación", "Los campos no están completos")
         }
     }
->>>>>>> d776bede6662fc86e4e876bd9b2f00e59c046dbd
+
+
+    //Metodo para crear un vehiculo
+    private Vehiculo crearVehiculo(String vehiculo){
+
+        switch (vehiculo) {
+            //Caso para crear un vehiculo moto
+            case "Motos":
+                Moto moto = new Moto();
+                moto.setPlaca(txtPlaca.getText());
+                moto.setMarca(txtMarca.getText());
+                moto.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
+                moto.setModelo(txtModelo.getText());
+                moto.setTiposCambios(cbxCambio.getValue());
+                moto.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
+                moto.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
+                moto.setCombustible(crearCombustible());
+                return moto;
+        
+            //Caso para crear un vehiculo sedan
+            case "Sedan":
+                Sedan sedan = new Sedan();
+
+                sedan.setPlaca(txtPlaca.getText());
+                sedan.setMarca(txtMarca.getText());
+                sedan.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
+                sedan.setModelo(txtModelo.getText());
+                sedan.setTiposCambios(cbxCambio.getValue());
+                sedan.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
+                sedan.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
+                sedan.setCombustible(crearCombustible());
+                sedan.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
+                sedan.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
+                sedan.setCapacidadMaletero(Float.parseFloat(txtCapacidadMaletero.getText()));
+                sedan.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
+                sedan.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
+                sedan.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
+                sedan.setTieneVelocidadCrucero(tieneVelocidad.getSelectedToggle().equals(rdVelocidadCruceroSi));
+                sedan.setTieneSensorColision(tieneSensorColi.getSelectedToggle().equals(rdSensorColisionSi));
+                sedan.setTieneSensorTraficoCruzado(tieneSensorTraf.getSelectedToggle().equals(tieneSensorTraficoSi));
+                sedan.setTieneAsistentePermanencia(tieneAsistente.getSelectedToggle().equals(rdTieneAsistenciaSi));
+                sedan.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
+                return sedan;
+
+            //Caso para crear un vehiculo deportivo
+            case "Deportivo":
+                Deportivo deportivo = new Deportivo();
+                deportivo.setPlaca(txtPlaca.getText());
+                deportivo.setMarca(txtMarca.getText());
+                deportivo.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
+                deportivo.setModelo(txtModelo.getText());
+                deportivo.setTiposCambios(cbxCambio.getValue());
+                deportivo.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
+                deportivo.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
+                deportivo.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
+                deportivo.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
+                deportivo.setCombustible(crearCombustible());
+                deportivo.setNumBolsasAire(Integer.parseInt(txtBolsaAireDep.getText()));
+                deportivo.setNumCaballosFuerza(Integer.parseInt(txtCaballosFuerzaDep.getText()));
+                deportivo.setTiempoAceleracion(Double.parseDouble(txtTiempAceleDep.getText()));
+                deportivo.setTieneAerodinamicaMejorada(tieneAerodinamicaDep.getSelectedToggle().equals(tieneAerodinamicaSi));
+                return deportivo;
+
+            //Caso para crear un vehiculo Camioneta
+            case "Camionetas":
+                Camioneta camioneta = new Camioneta();
+                camioneta.setPlaca(txtPlaca.getText());
+                camioneta.setMarca(txtMarca.getText());
+                camioneta.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
+                camioneta.setModelo(txtModelo.getText());
+                camioneta.setTiposCambios(cbxCambio.getValue());
+                camioneta.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
+                camioneta.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
+                camioneta.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
+                camioneta.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
+                camioneta.setCapacidadMaletero(Float.parseFloat(txtCapacidadMaletero.getText()));
+                camioneta.setCombustible(crearCombustible());
+                camioneta.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
+                camioneta.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
+                camioneta.setTieneVelocidadCrucero(tieneVelocidad.getSelectedToggle().equals(rdVelocidadCruceroSi));
+                camioneta.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
+                camioneta.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
+                camioneta.setEs4x4(tiene4x4.getSelectedToggle().equals(rdTiene4X4Si));
+                camioneta.setTieneSensorColision(tieneSensorColi.getSelectedToggle().equals(rdSensorColisionSi));
+                camioneta.setTieneSensorTraficoCruzado(tieneSensorTraf.getSelectedToggle().equals(tieneSensorTraficoSi));
+                camioneta.setTieneAsistentePermanencia(tieneAsistente.getSelectedToggle().equals(rdTieneAsistenciaSi));
+                return camioneta;
+
+            //Caso para crear un vehiculo PickUps
+            case "PickUps":
+                PickUps pickUp = new PickUps();
+                pickUp.setPlaca(txtPlaca.getText());
+                pickUp.setMarca(txtMarca.getText());
+                pickUp.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
+                pickUp.setModelo(txtModelo.getText());
+                pickUp.setTiposCambios(cbxCambio.getValue());
+                pickUp.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
+                pickUp.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
+                pickUp.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
+                pickUp.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
+                pickUp.setCapacidadCajaCarga(Float.parseFloat(txtCapacidadCarga.getText()));
+                pickUp.setCombustible(crearCombustible());
+                pickUp.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
+                pickUp.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
+                pickUp.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
+                pickUp.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
+                pickUp.setEs4x4(tiene4x4.getSelectedToggle().equals(rdTiene4X4Si));
+                return pickUp;
+
+            //Caso para crear un vehiculo Vans
+            case "Vans":
+                Vans vans = new Vans();
+                vans.setPlaca(txtPlaca.getText());
+                vans.setMarca(txtMarca.getText());
+                vans.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
+                vans.setModelo(txtModelo.getText());
+                vans.setTiposCambios(cbxCambio.getValue());
+                vans.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
+                vans.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
+                vans.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
+                vans.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
+                vans.setCapacidadMaletero(Float.parseFloat(txtCapacidadMaletero.getText()));
+                vans.setCombustible(crearCombustible());
+                vans.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
+                vans.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
+                vans.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
+                vans.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
+                return vans;
+
+            //Caso para crear un vehiculo Bus
+            case "Buses":
+                Bus buses = new Bus();
+                buses.setPlaca(txtPlaca.getText());
+                buses.setMarca(txtMarca.getText());
+                buses.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
+                buses.setModelo(txtModelo.getText());
+                buses.setTiposCambios(cbxCambio.getValue());
+                buses.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
+                buses.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
+                buses.setNumPasajeros(Integer.parseInt(txtNumPasajeros.getText()));
+                buses.setNumPuertas(Integer.parseInt(txtPuertas.getText()));
+                buses.setCapacidadMaletero(Float.parseFloat(txtCapacidadMaletero.getText()));
+                buses.setNumEjes(Integer.parseInt(txtNumEjes.getText()));
+                buses.setCombustible(crearCombustible());
+                buses.setTieneAcondicionado(tieneAireAcon.getSelectedToggle().equals(aireAcondicionadoSi));
+                buses.setTieneCamaraReversa(tieneCamara.getSelectedToggle().equals(rdCamaraReversaSi));
+                buses.setNumeroBolsaAire(Integer.parseInt(txtNumBolsasAire.getText()));
+                buses.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
+                return buses;
+
+            //Caso para crear un vehiculo Camion
+            case "Camiones":
+                Camion camiones = new Camion();
+                camiones.setPlaca(txtPlaca.getText());
+                camiones.setMarca(txtMarca.getText());
+                camiones.setEsNuevo(esNuevo.getSelectedToggle().equals(rdEsNuevoSi));
+                camiones.setModelo(txtModelo.getText());
+                camiones.setTiposCambios(cbxCambio.getValue());
+                camiones.setVelocidadMax(Float.parseFloat(txtVelocidad.getText()));
+                camiones.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
+                camiones.setCapCarga(Float.parseFloat(txtCapCargaCam.getText()));
+                camiones.setTieneAireAcondicionado(tieneAireAconCam.getSelectedToggle().equals(rdAcondicionCamSi));
+                camiones.setTieneFrenosAire(tieneFrenosAire.getSelectedToggle().equals(rdFrenosAireSi));
+                camiones.setTieneABS(tieneABS1Cam.getSelectedToggle().equals(rdTieneAbsCamSi));
+                camiones.setNumeroEjes(Integer.parseInt(txtNumEjesCam.getText()));
+                camiones.setTipoCamion(cbxCamiones.getValue());
+                camiones.setCombustible(crearCombustible());
+                return camiones;
+
+            //Default para retornar null
+            default:
+                return null;
+        }
+    }
+
+    //Evento para eliminar un vehiculo
+    @FXML
+    void eventoEliminar(ActionEvent event) throws VehiculoException{
+        Vehiculo vehiculo = tblVehiculo.getSelectionModel().getSelectedItem();
+        String ruta;
+        if(!vehiculo.getImagen().equals("src/main/resources/Images/404.jpg")){
+            ruta = vehiculo.getImagen();
+        }else{
+            ruta = "";
+        }
+
+        if (vehiculo != null) {
+            if (empleadoController.removerVehiculo(vehiculo) == 1) {
+                eliminarImagenProducto(ruta);
+
+                mensajeInformacion("Vehiculo Eliminado", "EL Vehiculo se ha eliminado con exito");
+                limpiarCampos();
+                listaVehiculo.clear();
+                obtenerVehiculos();
+                tblVehiculo.refresh();
+            } else {
+                mensajeError("Vehiculo no Elimnado", "El Admin no se ah eliminado");
+            }
+        } else {
+            mensajeError("Vehiculo no seleccionado", "Seleccione un vehiculo para continuar con la eliminicacion");
+        }
+    }
+
+    //Metodo para el evento de limpiar campos
+    @FXML
+    void eventoLimpiar(ActionEvent event) {
+        limpiarCampos();
+    }
+
+    //evento para guardar una imagen
+    @FXML
+    void guardarImagen(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccione una imagen");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.jpeg", "*.png", "*.gif")
+        );
+
+        // Obtener la ventana principal para que el diálogo se abra en el contexto adecuado
+        Stage stage = (Stage) imagenView.getScene().getWindow();
+        imagenSeleccionada = fileChooser.showOpenDialog(stage);
+
+        if (imagenSeleccionada!= null) {
+            // Mostrar la imagen seleccionada en el ImageView
+            imagenView.setImage(new Image(imagenSeleccionada.toURI().toString()));
+        }
+    }
+
+    //Metodo para copiar la imagen de un vehiculo
+    public void copiarImagenAdmin(File archivoImagen,Vehiculo vehiculo){
+        String carpetaDestino = "src/main/resources/Images";
+        String extension = getExtension(archivoImagen.getName());
+        Path destino = Path.of(carpetaDestino, vehiculo.getPlaca() + "." + extension);
+
+        try {
+            // Copiar la imagen al destino
+            Files.copy(archivoImagen.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
+
+            // Actualizar la ruta de la imagen en el objeto Producto
+            vehiculo.setImagen(destino.toString());
+            System.out.println("Imagen copiada en: " + destino.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Metodo para obtener la extension de un archivo
+    private String getExtension(String nombreArchivo) {
+        int i = nombreArchivo.lastIndexOf('.');
+        return (i > 0) ? nombreArchivo.substring(i + 1) : "";
+    }
+
+    //Metodo para eliminar la imagen
+    private void eliminarImagenProducto(String rutaImagen) {
+        try {
+            Path path = Paths.get(rutaImagen);
+            Files.deleteIfExists(path); // Elimina el archivo si existe
+        } catch (IOException e) {}
+    }
+
+    //Metodo para crear un combustible
+    private Combustible crearCombustible(){
+        String tipo = cbxCombustible.getValue().toString();
+        switch (tipo) {
+            case "ELECTRICO":
+                Electrico electrico = new Electrico(TipoCombustible.ELECTRICO);
+                electrico.setAutonomia(Integer.parseInt(txtDuracionBateria.getText()));
+                electrico.setTiempoCarga(Integer.parseInt(txtCargaRapida.getText()));
+                return electrico;
+            case "HIBRIDO":
+                Hibrido hibrido = new Hibrido(TipoCombustible.HIBRIDO);
+                boolean enchufable = esEnchufable.getSelectedToggle().equals(rdEsEnchufableSi);
+                hibrido.setEsEnchufable(enchufable);
+                if (enchufable) {
+                    hibrido.setEsHibridoLigero(false);
+                }else{
+                    boolean esHibrido = esHibridoLigero.getSelectedToggle().equals(esHibridoSi);
+                    hibrido.setEsHibridoLigero(esHibrido);
+                }
+                return hibrido;
+            case "DIESEL":
+                return new Diesel(TipoCombustible.DIESEL);
+            case "GASOLINA":
+                return new Gasolina(TipoCombustible.GASOLINA);
+            default:
+                return null;
+        }
+    }
+    
+    //Metodo para limpiar los campos
+    private void limpiarCampos() {
+        // Limpiar todos los campos de texto
+        txtMarca.clear();
+        txtModelo.clear();
+        txtCilindraje.clear();
+        txtVelocidad.clear();
+        txtNumPasajeros.clear();
+        txtPuertas.clear();
+        txtCapacidadMaletero.clear();
+        txtCapacidadCarga.clear();
+        txtNumEjes.clear();
+        txtNumBolsasAire.clear();
+        txtBolsaAireDep.clear();
+        txtCaballosFuerzaDep.clear();
+        txtTiempAceleDep.clear();
+        txtCapCargaCam.clear();
+        txtCargaRapida.clear();
+        txtDuracionBateria.clear();
+        txtNumEjesCam.clear();
+        txtCapacidadCarga.clear();
+        txtPlaca.clear();
+
+        // Restablecer la selección en todos los ComboBox
+        cbxCambio.setValue(null);
+        cbxCamiones.setValue(null);
+        cbxCombustible.setValue(null);
+        cbxTipoVehiculo.setValue(null);
+
+        // Restablecer la selección en todos los ToggleGroups (RadioButtons)
+        tieneABS.selectToggle(null);
+        tieneAireAcon.selectToggle(null);
+        tieneCamara.selectToggle(null);
+        tieneVelocidad.selectToggle(null);
+        tieneSensorColi.selectToggle(null);
+        tieneSensorTraf.selectToggle(null);
+        tieneAsistente.selectToggle(null);
+        tiene4x4.selectToggle(null);
+        tieneAerodinamicaDep.selectToggle(null);
+        tieneFrenosAire.selectToggle(null);
+        esNuevo.selectToggle(null);
+        esEnchufable.selectToggle(null);
+        esHibridoLigero.selectToggle(null);
+
+        // Limpiar imagen seleccionada en ImageView, si es necesario
+        imagenView.setImage(null);
+        txtPlaca.setEditable(true);
+        cbxTipoVehiculo.setDisable(false);
+        imagenSeleccionada = null;
+    }
+
+    // Método para verificar que todos los campos estén completos
+    private boolean verificarCampos() {
+        String tipoVehiculo = cbxTipoVehiculo.getValue();
+        boolean camposCompletos = true;
+
+        camposCompletos &= !txtPlaca.getText().isEmpty();
+        camposCompletos &= !txtMarca.getText().isEmpty();
+        camposCompletos &= esNuevo.getSelectedToggle() != null;
+        camposCompletos &= !txtModelo.getText().isEmpty();
+        camposCompletos &= cbxCambio.getValue() != null;
+        camposCompletos &= !txtVelocidad.getText().isEmpty();
+        camposCompletos &= !txtCilindraje.getText().isEmpty();
+        camposCompletos &= cbxCombustible.getValue() != null;
+
+        // Verificar campos dependiendo del tipo de vehículo
+        switch (tipoVehiculo) {
+            case "Motos":
+                break;
+
+            case "Sedan":
+                camposCompletos &= !txtNumPasajeros.getText().isEmpty();
+                camposCompletos &= !txtPuertas.getText().isEmpty();
+                camposCompletos &= !txtCapacidadMaletero.getText().isEmpty();
+                camposCompletos &= tieneAireAcon.getSelectedToggle() != null;
+                camposCompletos &= tieneCamara.getSelectedToggle() != null;
+                camposCompletos &= tieneVelocidad.getSelectedToggle() != null;
+                camposCompletos &= !txtNumBolsasAire.getText().isEmpty();
+                camposCompletos &= tieneABS.getSelectedToggle() != null;
+                camposCompletos &= tieneSensorColi.getSelectedToggle() != null;
+                camposCompletos &= tieneSensorTraf.getSelectedToggle() != null;
+                camposCompletos &= tieneAsistente.getSelectedToggle() != null;
+                break;
+
+            case "Deportivo":
+                camposCompletos &= !txtMarca.getText().isEmpty();
+                camposCompletos &= esNuevo.getSelectedToggle() != null;
+                camposCompletos &= !txtModelo.getText().isEmpty();
+                camposCompletos &= cbxCambio.getValue() != null;
+                camposCompletos &= !txtVelocidad.getText().isEmpty();
+                camposCompletos &= !txtCilindraje.getText().isEmpty();
+                camposCompletos &= !txtNumPasajeros.getText().isEmpty();
+                camposCompletos &= !txtPuertas.getText().isEmpty();
+                camposCompletos &= !txtBolsaAireDep.getText().isEmpty();
+                camposCompletos &= !txtCaballosFuerzaDep.getText().isEmpty();
+                camposCompletos &= !txtTiempAceleDep.getText().isEmpty();
+                break;
+
+            case "Camionetas":
+                camposCompletos &= !txtMarca.getText().isEmpty();
+                camposCompletos &= esNuevo.getSelectedToggle() != null;
+                camposCompletos &= !txtModelo.getText().isEmpty();
+                camposCompletos &= cbxCambio.getValue() != null;
+                camposCompletos &= !txtVelocidad.getText().isEmpty();
+                camposCompletos &= !txtCilindraje.getText().isEmpty();
+                camposCompletos &= !txtNumPasajeros.getText().isEmpty();
+                camposCompletos &= !txtPuertas.getText().isEmpty();
+                camposCompletos &= !txtCapacidadMaletero.getText().isEmpty();
+                camposCompletos &= tieneAireAcon.getSelectedToggle() != null;
+                camposCompletos &= tieneCamara.getSelectedToggle() != null;
+                camposCompletos &= tieneVelocidad.getSelectedToggle() != null;
+                camposCompletos &= !txtNumBolsasAire.getText().isEmpty();
+                camposCompletos &= tieneABS.getSelectedToggle() != null;
+                camposCompletos &= tieneSensorColi.getSelectedToggle() != null;
+                camposCompletos &= tieneSensorTraf.getSelectedToggle() != null;
+                camposCompletos &= tieneAsistente.getSelectedToggle() != null;
+                camposCompletos &= tiene4x4.getSelectedToggle() != null;
+                break;
+
+            case "PickUps":
+                camposCompletos &= !txtNumPasajeros.getText().isEmpty();
+                camposCompletos &= !txtPuertas.getText().isEmpty();
+                camposCompletos &= tieneAireAcon.getSelectedToggle() != null;
+                camposCompletos &= tieneCamara.getSelectedToggle() != null;
+                camposCompletos &= !txtNumBolsasAire.getText().isEmpty();
+                camposCompletos &= tieneABS.getSelectedToggle() != null;
+                camposCompletos &= tiene4x4.getSelectedToggle() != null;
+                camposCompletos &= !txtCapacidadCarga.getText().isEmpty();
+                break;
+
+            case "Vans":
+                camposCompletos &= !txtMarca.getText().isEmpty();
+                camposCompletos &= esNuevo.getSelectedToggle() != null;
+                camposCompletos &= !txtModelo.getText().isEmpty();
+                camposCompletos &= cbxCambio.getValue() != null;
+                camposCompletos &= !txtVelocidad.getText().isEmpty();
+                camposCompletos &= !txtCilindraje.getText().isEmpty();
+                camposCompletos &= !txtNumPasajeros.getText().isEmpty();
+                camposCompletos &= !txtPuertas.getText().isEmpty();
+                camposCompletos &= !txtCapacidadMaletero.getText().isEmpty();
+                camposCompletos &= tieneAireAcon.getSelectedToggle() != null;
+                camposCompletos &= tieneCamara.getSelectedToggle() != null;
+                camposCompletos &= !txtNumBolsasAire.getText().isEmpty();
+                camposCompletos &= tieneABS.getSelectedToggle() != null;
+                break;
+
+            case "Buses":
+                camposCompletos &= !txtMarca.getText().isEmpty();
+                camposCompletos &= esNuevo.getSelectedToggle() != null;
+                camposCompletos &= !txtModelo.getText().isEmpty();
+                camposCompletos &= cbxCambio.getValue() != null;
+                camposCompletos &= !txtVelocidad.getText().isEmpty();
+                camposCompletos &= !txtCilindraje.getText().isEmpty();
+                camposCompletos &= !txtNumPasajeros.getText().isEmpty();
+                camposCompletos &= !txtPuertas.getText().isEmpty();
+                camposCompletos &= !txtCapacidadMaletero.getText().isEmpty();
+                camposCompletos &= tieneAireAcon.getSelectedToggle() != null;
+                camposCompletos &= tieneCamara.getSelectedToggle() != null;
+                camposCompletos &= !txtNumBolsasAire.getText().isEmpty();
+                camposCompletos &= tieneABS.getSelectedToggle() != null;
+                camposCompletos &= !txtNumEjes.getText().isEmpty();
+                break;
+
+            case "Camiones":
+                camposCompletos &= !txtMarca.getText().isEmpty();
+                camposCompletos &= esNuevo.getSelectedToggle() != null;
+                camposCompletos &= !txtModelo.getText().isEmpty();
+                camposCompletos &= cbxCambio.getValue() != null;
+                camposCompletos &= !txtVelocidad.getText().isEmpty();
+                camposCompletos &= !txtCilindraje.getText().isEmpty();
+                camposCompletos &= !txtCapCargaCam.getText().isEmpty();
+                camposCompletos &= tieneAireAconCam.getSelectedToggle() != null;
+                camposCompletos &= tieneFrenosAire.getSelectedToggle() != null;
+                camposCompletos &= tieneABS1Cam.getSelectedToggle() != null;
+                camposCompletos &= !txtNumEjesCam.getText().isEmpty();
+                break;
+
+            default:
+                camposCompletos = false;
+                break;
+        }
+        return camposCompletos;
+    }
+
+    //Metodo para mostrar un mensaje de información
+    public void mensajeInformacion(String title, String context){
+
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(context);
+    alert.showAndWait();
+    }
+
+    //Metodo para mostrar un mensaje de error
+    public void mensajeError(String title, String context){
+
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle(title);
+    alert.setHeaderText(" Error!!");
+    alert.setContentText(context);
+    alert.showAndWait();
+    }
 }
