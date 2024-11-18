@@ -33,6 +33,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
@@ -315,6 +316,7 @@ public class CrudVehiculo {
     ObservableList<Vehiculo> listaVehiculo = FXCollections.observableArrayList();
     private File imagenSeleccionada;
 
+<<<<<<< HEAD
 
 
 
@@ -1064,4 +1066,5 @@ public class CrudVehiculo {
             mensajeError("Error en la creación", "Los campos no están completos")
         }
     }
+>>>>>>> d776bede6662fc86e4e876bd9b2f00e59c046dbd
 }
