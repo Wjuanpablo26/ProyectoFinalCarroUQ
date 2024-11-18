@@ -2,6 +2,7 @@ package co.edu.uniquindio.poo.proyectofinalcarrouq.Utils;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.NetworkInterface;
 import java.time.LocalDate;
 import java.time.chrono.HijrahChronology;
 import java.util.ArrayList;
@@ -12,8 +13,10 @@ import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Camioneta;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Deportivo;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Empleado;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Moto;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.PickUps;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Sedan;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.UserName;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Vans;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Combustible.Combustible;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Combustible.Diesel;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Combustible.Electrico;
@@ -514,6 +517,279 @@ public class Persistencia {
         // Guarda el contenido en el archivo especificado
         ArchivoUtils.guardarArchivo(rutaCamionetas, contenido.toString(), false);
     }
+
+    public static ArrayList<Camioneta> cargarCamionetas() throws IOexception{
+        ArrayList<Camioneta> listaCamionetas = new ArrayList<>();
+        ArrayList<String> contenido = ArchivoUtils.leerArchivos(rutaCamionetas);
+
+        for (String linea : contenido){
+            String[] partes = linea.split("%%");
+
+            if(partes.length < 22){
+                continue; //si no hay suficientes partes, pasar a la siguiente linea
+            }
+
+            // crear una instancia vacia de camionetas
+            Camioneta camioneta = new Camioneta();
+            
+            //usar los metodos set para asignar los valores
+            camioneta.setPlaca(partes[0]);
+            camioneta.setMarca(partes[1]);
+            camioneta.setEsNuevo(Boolean.parseBoolean(partes[2]));
+            camioneta.setModelo(partes[3]);
+            camioneta.setTiposCambios(TiposCambios.valueOf(partes[4]));
+            camioneta.setVelocidadMax(Float.parseFloat(partes[5]));
+            camioneta.setCilindraje(Float.parseFloat(partes[6]));
+            camioneta.setNumPasajeros(Integer.parseInt(partes[7]));
+            camioneta.setNumPuertas(Integer.parseInt(partes[8]));
+
+            // crear un nuevo objeto combustible
+            String tipoCombustible = partes [9];
+            Combustible combustible = null;
+
+            //determinar el tipo de combustible
+            if (tipoCombustible.equals("HÍBRIDO")){
+                boolean esEnchufable = Boolean.parseBoolean(partes[22]);
+                boolean esHibridoLigero = Boolean.parseBoolean(partes[23]);
+                combustible = new Hibrido(TipoCombustible.valueOf(partes[9]), esEnchufable, esHibridoLigero);
+            } else if(tipoCombustible.equals("ELÉCTRICO")) {
+                int autonomia = Integer.parseInt(partes[22]);
+                int tiempoCarga = Integer.parseInt(partes[23]);
+                combustible = new Electrico(TipoCombustible.valueOf(partes[9]), autonomia, tiempoCarga);
+            }else if (tipoCombustible.equals("DIESEL")){
+                combustible = new Diesel(TipoCombustible.valueOf(partes[9]));
+            }else if (tipoCombustible.equals("GASOLINA")){
+                combustible = new Gasolina(TipoCombustible.valueOf(partes[9]));
+            }
+            camioneta.setCombustible(combustible);
+            camioneta.setTipoEstado(TipoEstado.valueOf(partes[11]));
+            camioneta.setTieneAcondicionado(Boolean.parseBoolean(partes[12]));
+            camioneta.setTieneCamaraReversa(Boolean.parseBoolean(partes[13]));
+            camioneta.setTieneVelocidadCrucero(Boolean.parseBoolean(partes[14]));
+            camioneta.setNumeroBolsaAire(Integer.parseInt(partes[15]));
+            camioneta.setTieneABS(Boolean.parseBoolean(partes[16]));
+            camioneta.setEs4x4(Boolean.parseBoolean(partes[17]));
+            camioneta.setTieneSensorColision(Boolean.parseBoolean(partes[18]));
+            camioneta.setTieneSensorTraficoCruzado(Boolean.parseBoolean(partes[19]));
+            camioneta.setTieneAsistentePermanencia(Boolean.parseBoolean(partes[20]));
+            camioneta.setCapacidadMaletero(Float.parseFloat(partes[21]));
+
+            //Agregar camioneta a la lista
+            listaCamionetas.add(camioneta);
+        }
+
+        return listaCamionetas;
+    }
+
+    public static void guardarPickUps(ArrayList<PickUps> listaPickUps) throws IOException {
+        StringBuilder contenido = new StringBuilder();
+
+        for(PickUps pickUp : listaPickUps){
+            contenido.append(pickUp.getPlaca()).append(" %%")
+                    .append(pickUp.getMarca()).append(" %% ")
+                    .append(pickUp.isEsNuevo()).append(" %% ")
+                    .append(pickUp.getModelo()).append(" %% ")
+                    .append(pickUp.getTiposCambios()).append(" %% ")
+                    .append(pickUp.getVelocidadMax()).append(" %% ")
+                    .append(pickUp.getCilindraje()).append(" %% ")
+                    .append(pickUp.getNumPasajeros()).append(" %% ")
+                    .append(pickUp.getNumPuertas()).append(" %% ")
+                    .append(pickUp.getCombustible().getTipoCombustible()).append(" %% ")
+                    .append(pickUp.getImagen()).append(" %% ")
+                    .append(pickUp.getTipoEstado()).append(" %% ")
+                    .append(pickUp.isTieneAcondicionado()).append(" %% ")
+                    .append(pickUp.isTieneCamaraReversa()).append(" %% ")
+                    .append(pickUp.isTieneVelocidadCrucero()).append(" %% ")
+                    .append(pickUp.getNumeroBolsaAire()).append(" %% ")
+                    .append(pickUp.isTieneABS()).append(" %% ")
+                    .append(pickUp.isEs4x4()).append(" %% ")
+                    .append(pickUp.getCapacidadCajaCarga()).append(" %% ")
+
+            // Guardar los atributos especificos del combustible
+            if (pickUp.getCombustible() instanceof Hibrido){
+                Hibrido hibrido = (Hibrido) pickUp.getCombustible();
+                contenido.append(hibrido.isEsEnchufable()).append(" %% ")
+                        .append(hibrido.isEsHibridoLigero()).append(" %% ");
+            } else if (pickUp.getCombustible() instanceof Electrico){
+                Electrico electrico = (Electrico) pickUp.getCombustible();
+                contenido.append(electrico.getAutonomia()).append(" %% ")
+                        .append(electrico.getTiempoCarga()).append(" %% ");
+            }
+
+            contenido.append("\n"); // Nueva linea para cada PickUp
+        }
+
+        ArchivoUtils.guardarArchivo(rutaPickUps, contenido.toString(), false);
+    }
+
+    public static ArrayList<PickUps> cargarPickUps() throws IOException {
+        ArrayList<PickUps> listaPickUps = new ArrayList<>();
+        ArrayList<String> contenido = ArchivoUtils.leerArchivos(rutaPickUps);
+
+        for(String linea : contenido){
+            String[] partes = linea.split(" %% ");
+
+            if(partes.length < 19){
+                continue; // si no hay suficientes partes, pasar a la siguiente linea
+            }
+
+            //crear una instancia vacia de PickUps
+            PickUps pickUp = new PickUps();
+
+            //usar los metodos set para asignar valores 
+            pickUp.setPlaca(partes[0]);
+            pickUp.setMarca(partes[1]);
+            pickUp.setEsNuevo(Boolean.parseBoolean(partes[2]));
+            pickUp.setModelo(partes[3]);
+            pickUp.setTiposCambios(TiposCambios.valueOf(partes[4]));
+            pickUp.setVelocidadMax(Float.parseFloat(partes[5]));
+            pickUp.setCilindraje(Float.parseFloat(partes[6]));
+            pickUp.setNumPasajeros(Integer.parseInt(partes[7]));
+            pickUp.setNumPuertas(Integer.parseInt(partes[8]));
+
+            //crear un nuevo objeto combustible
+            String tipoCombustible = partes[9];
+            Combustible combustible = null;
+
+            //determinar el tipo de combustible
+            if(tipoCombustible.equals("HÍBRIDO")){
+                boolean esEnchufable = Boolean.parseBoolean(partes[19]);
+                boolean esHibridoLigero = Boolean.parseBoolean(partes[20]);
+                combustible = new Hibrido(TipoCombustible.valueOf(partes[9]), esEnchufable, esHibridoLigero);
+            } else if (tipoCombustible.equals("ELÉCTRICO")) {
+                int autonomia = Integer.parseInt(partes[19]);
+                int tiempoCarga = Integer.parseInt(partes[20]);
+                combustible = new Electrico(TipoCombustible.valueOf(partes[9]), autonomia, tiempoCarga);
+            } else if (tipoCombustible.equals("DIESEL")){
+                combustible = new Diesel(TipoCombustible.valueOf(partes[9]));
+            } else if (tipoCombustible.equals("GASOLINA")) {
+                combustible = new Gasolina(TipoCombustible.valueOf(partes[9]));
+            }
+            pickUp.setCombustible(combustible);
+
+            pickUp.setImagen(partes[10]);
+            pickUp.setTipoEstado(TipoEstado.valueOf(partes[11]));
+            pickUp.setTieneAcondicionado(Boolean.parseBoolean(partes[12]));
+            pickUp.setTieneCamaraReversa(Boolean.parseBoolean(partes[13]));
+            pickUp.setTieneVelocidadCrucero(Boolean.parseBoolean(partes[14]));
+            pickUp.setNumeroBolsaAire(Integer.parseInt(partes[15]));
+            pickUp.setTieneABS(Boolean.parseBoolean(partes[16]));
+            pickUp.setEs4x4(Boolean.parseBoolean(partes[17]));
+            pickUp.setCapacidadCajaCarga(Float.parseFloat(partes[18]));
+
+            // Agregar el objeto PickUps a ls lista
+            listaPickUps.add(pickUp);
+        }
+
+        return listaPickUps;
+    }
+
+
+    public static void guardaVans(ArrayList<Vans> listaVans) throws IOException {
+        StringBuilder contenido = new StringBuilder();
+
+        for(Vans van : listaVans){
+            contenido.append(van.getPlaca()).append(" %% ")
+                    .append(van.getMarca()).append(" %% ")
+                    .append(van.isEsNuevo()).append(" %% ")
+                    .append(van.getModelo()).append(" %% ")
+                    .append(van.getTiposCambios()).append(" %% ")
+                    .append(van.getVelocidadMax()).append(" %% ")
+                    .append(van.getCilindraje()).append(" %% ")
+                    .append(van.getNumPasajeros()).append(" %% ")
+                    .append(van.getNumPuertas()).append(" %% ")
+                    .append(van.getCombustible().getTipoCombustible()).append(" %% ")
+                    .append(van.getImagen()).append(" %% ")
+                    .append(van.getTipoEstado()).append(" %% ")
+                    .append(van.isTieneAcondicionado()).append(" %% ")
+                    .append(van.isTieneCamaraReversa()).append(" %% ")
+                    .append(van.isTieneVelocidadCrucero()).append(" %% ")
+                    .append(van.getNumeroBolsaAire()).append(" %% ")
+                    .append(van.isTieneABS()).append(" %% ")
+                    .append(van.isEs4x4()).append(" %% ")
+                    .append(van.getCapacidadMaletero()).append(" %% ");
+
+            // guardar los atributos especificos del combustible
+            if (van.getCombustible() instanceof Hibrido){
+                Hibrido hibrido = (Hibrido) van.getCombustible();
+                contenido.append(hibrido.isEsEnchufable()).append(" %% ")
+                    .append(hibrido.isEsHibridoLigero()).append(" %% ");
+            } else if (van.getCombustible() instanceof Electrico){
+                Electrico electrico = (Electrico) van.getCombustible();
+                contenido.append(electrico.getAutonomia()).append(" %% ")
+                    .append(electrico.getTiempoCarga()).append(" %% ");
+            }
+
+            contenido.append("\n"); // nueva linea para cada van
+        }
+
+        ArchivoUtils.guardarArchivo(rutaVans, contenido.toString(), false);
+    }
+
+    public static ArrayList<Vans> cargarVans() throws IOException{
+        ArrayList<Vans> listaVans = new ArrayList<>();
+        ArrayList<String> contenido = ArchivoUtils.leerArchivos(rutaVans);
+
+        for(String linea : contenido){
+            String[] partes = linea.split(" %% ");
+
+            if(partes.length < 19){
+                continue; // verifica que haya suficientes partes
+            }
+
+            // crear una instancia vacia de vans
+            Vans van = new Vans();
+
+            //usar metodos set para asignar los valores
+            van.setPlaca(partes[0]);
+            van.setMarca(partes[1]);
+            van.setEsNuevo(Boolean.parseBoolean(partes[2]));
+            van.setModelo(partes[3]);
+            van.setTiposCambios(TiposCambios.valueOf(partes[4]));
+            van.setVelocidadMax(Float.parseFloat(partes[5]));
+            van.setCilindraje(Float.parseFloat(partes[6]));
+            van.setNumPasajeros(Integer.parseInt(partes[7]));
+            van.setNumPuertas(Integer.parseInt(partes[8]));
+
+            //crear un nuevo objeto combustible
+            String tipoCombustible = partes [9];
+            Combustible combustible = null;
+
+            // determinar el tipo de combustible
+            if(tipoCombustible.equals("HÍBRIDO")){
+                boolean esEnchufable = Boolean.parseBoolean(partes[19]);
+                boolean esHibridoLigero = Boolean.parseBoolean(partes[20]);
+                combustible = new Hibrido(TipoCombustible.valueOf(partes[9]), esEnchufable, esHibridoLigero);
+            } else if (tipoCombustible.equals("ELÉCTRICO")) {
+                int autonomia = Integer.parseInt(partes[19]);
+                int tiempoCarga = Integer.parseInt(partes[20]);
+                combustible = new Electrico(TipoCombustible.valueOf(partes[9]), autonomia, tiempoCarga);
+            } else if (tipoCombustible.equals("DIESEL")){
+                combustible = new Diesel(TipoCombustible.valueOf(partes[9]));
+            } else if (tipoCombustible.equals("GASOLINA")) {
+                combustible = new Gasolina(TipoCombustible.valueOf(partes[9]));
+            }
+            van.setCombustible(combustible);
+
+            van.setImagen(partes[10]);
+            van.setTipoEstado(TipoEstado.valueOf(partes[11]));
+            van.setTieneAcondicionado(Boolean.parseBoolean(partes[12]));
+            van.setTieneCamaraReversa(Boolean.parseBoolean(partes[13]));
+            van.setTieneVelocidadCrucero(Boolean.parseBoolean(partes[14]));
+            van.setNumeroBolsaAire(Integer.parseInt(partes[15]));
+            van.setTieneABS(Boolean.parseBoolean(partes[16]));
+            van.setEs4x4(Boolean.parseBoolean(partes[17]));
+            van.setCapacidadMaletero(Float.parseFloat(partes[18]));
+
+            // Agregar el objeto PickUps a ls lista
+            listaVans.add(van);
+        }
+
+        return listaVans;
+        
+    }
+
+
 
 
 
