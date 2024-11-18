@@ -740,7 +740,7 @@ public class CrudVehiculo {
                 mensajeError("Error en la creación", "Los datos son inválidos o ya fueron utilizados");
             }
         }else{
-            mensajeError("Error en la creación", "Los campos no están completos")
+            mensajeError("Error en la creación", "Los campos no están completos");
         }
     }
 
