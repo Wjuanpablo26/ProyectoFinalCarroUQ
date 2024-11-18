@@ -8,7 +8,7 @@ public class LogginController {
     }
 
     //Método para autentificar
-    public int authenticated(String username, String password){
+    public int authenticate(String username, String password){
         return modelFactory.autentificacion(username, password);
     }
 

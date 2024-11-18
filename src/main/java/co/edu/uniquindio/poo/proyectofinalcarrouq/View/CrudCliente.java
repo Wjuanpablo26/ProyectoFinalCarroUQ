@@ -1,10 +1,9 @@
 package co.edu.uniquindio.poo.proyectofinalcarrouq.View;
 
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Controller.AdminController;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Controller.EmpleadoController;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Admin;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Cliente;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.Genero;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.UserName;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Utils.TextFormatterUtils;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -14,37 +13,52 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import java.time.LocalDate;
 import java.util.Optional;
 
-public class CrudAdmin {
+public class CrudCliente {
     
     //Atributos
     @FXML
-    private TextField txtCedula, txtNombre, txtCorreo, txtEdad, txtUsername;
-    @FXML
-    private PasswordField txtPassword;
-    @FXML
     private ComboBox<Genero> cbxGenero;
-    @FXML
-    private TableView<Admin> tablaAdmins;
-    @FXML
-    private TableColumn<Admin, String> colCedula, colNombre, colCorreo, colUserName;
-    @FXML
-    private TableColumn<Admin, Genero> colGenero;
-    @FXML
-    private TableColumn<Admin, Integer> colEdad;
 
-    private AdminController adminController;
-    ObservableList<Admin> listaAdmins = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<Cliente, String> colCedula, colCorreo,colNombre;
+
+    @FXML
+    private TableColumn<Cliente, Integer> colEdad;
+
+    @FXML
+    private TableColumn<Cliente, Genero> colGenero;
+
+
+    @FXML
+    private TableView<Cliente> tablaClientes;
+
+    @FXML
+    private TextField txtCedula;
+
+    @FXML
+    private TextField txtCorreo;
+
+    @FXML
+    private TextField txtEdad;
+
+    @FXML
+    private TextField txtNombre;
+
+
+    private EmpleadoController empleadoController;
+    ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
 
     //Metodo para inicializar la vista
     @FXML
     private void initialize() {
-        adminController = new AdminController();
+        empleadoController = new EmpleadoController();
         initView();
-        obtenerAdmins();
-        tablaAdmins.getItems().clear();
-        tablaAdmins.setItems(listaAdmins);
+        obtenerClientes();
+        tablaClientes.getItems().clear();
+        tablaClientes.setItems(listaClientes);
         selectionModel();
         // Formato para solo aceptar numeros.
         txtEdad.setTextFormatter(new TextFormatter<>(TextFormatterUtils:: integerFormat));
@@ -58,109 +72,106 @@ public class CrudAdmin {
         colCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCorreo()));
         colGenero.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getGenero()));
         colEdad.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getEdad()).asObject());
-        colUserName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUserName().getUsername()));
-
         cbxGenero.setItems(FXCollections.observableArrayList(Genero.values()));
         cbxGenero.setItems(FXCollections.observableArrayList(Genero.values()));
     }
 
-    private void obtenerAdmins(){
-        listaAdmins.addAll(adminController.obtenerAdmins());
+    //Metodo para obtener los clientes
+    private void obtenerClientes(){
+        listaClientes.addAll(empleadoController.obtenerClientes());
     }
 
+    //Metodo para seleccionar un cliente
     private void selectionModel(){
         // It checks if the table is not empty.
-        if (tablaAdmins != null){
+        if (tablaClientes != null){
             // Method for selecting Admins.
-            tablaAdmins.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelecation)->{
+            tablaClientes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelecation)->{
                 // A AdminsDto is created with the one selected from the table.
-                Admin admin = newSelecation;
-                if (admin != null){
+                Cliente cliente = newSelecation;
+                if (cliente != null){
                     // The method to fill the fields is called.
-                    llenarCampos(admin);
+                    llenarCampos(cliente);
                     // The txt becomes non-editable.
                     txtCedula.setEditable(false);
                     txtCorreo.setEditable(false);
                 }});
         }}
 
-    //Metodo para crear un admin
-    public Admin crearAdmin(){
-        Admin admin = new Admin();
-        admin.setCedula(txtCedula.getText());
-        admin.setCorreo(txtCorreo.getText());
-        admin.setNombre(txtNombre.getText());
-        admin.setEdad(Integer.parseInt(txtEdad.getText()));
-        admin.setGenero(cbxGenero.getValue());
+    //Metodo para crear un cliente
+    public Cliente crearCliente(){
+        Cliente cliente = new Cliente();
+        cliente.setCedula(txtCedula.getText());
+        cliente.setCorreo(txtCorreo.getText());
+        cliente.setNombre(txtNombre.getText());
+        cliente.setEdad(Integer.parseInt(txtEdad.getText()));
+        cliente.setGenero(cbxGenero.getValue());
+        cliente.setFechaRegistro(LocalDate.now());
 
-        UserName userName = new UserName();
-        userName.setUserName(txtUsername.getText());
-        userName.setPassword(txtPassword.getText());
-        admin.setUserName(userName);
-        return admin;
+        return cliente;
     }
 
-    //Metodo para agregar un admin
+    //Metodo para agregar un cliente
     @FXML
-    void agregarAdmin(ActionEvent event) throws PersonaException {
+    void agregarCliente(ActionEvent event) throws PersonaException {
         if (camposLlenos()){
-            int resultado = adminController.addAdmin(crearAdmin());
+            int resultado = empleadoController.addCliente(crearCliente());
 
             switch (resultado){
 
                 case 1:
 
-                    mensajeInformacion("Creacion Completada","Se Creo el Admin correctamente");
+                    mensajeInformacion("Creacion Completada","Se Creo el Cliente correctamente");
                     limpiarCampos();
-                    listaAdmins.clear();
-                    obtenerAdmins();
-                    tablaAdmins.refresh();
+                    listaClientes.clear();
+                    obtenerClientes();
+                    tablaClientes.refresh();
                     break;
 
                 case 2:
                     mensajeError("Error en la Creacion","Los Datos son invalidos o ya utilizados");
             }}}
 
-    //Metodo para editar un admin
+    //Metodo para editar un cliente
     @FXML
-    void editarAdmin(ActionEvent event) throws PersonaException {
-        Admin seleccionado = tablaAdmins.getSelectionModel().getSelectedItem();
+    void editarCliente(ActionEvent event) throws PersonaException {
+        Cliente seleccionado = tablaClientes.getSelectionModel().getSelectedItem();
         if (seleccionado == null){
-            mensajeError("Error al actualizar","Por favor, seleccione un admin de la lista para actualizar");
+            mensajeError("Error al actualizar","Por favor, seleccione un cliente de la lista para actualizar");
         }else {
-            if (mensajeConfirmacion("Confirmarcion de actualizar", "Actualizar Admin",
-                    "Desea Actualizar el Admin?")) {
-                Admin admin = crearAdmin();
-                if (adminController.actualizarAdmin(seleccionado.getCedula(),admin)){
-                    mensajeInformacion("Admin Actualizado", "Se actualizo el Admin correctamente");
-                    tablaAdmins.getSelectionModel().clearSelection();
+            if (mensajeConfirmacion("Confirmarcion de actualizar", "Actualizar Cliente",
+                    "Desea Actualizar el Cliente?")) {
+                Cliente cliente = crearCliente();
+                if (empleadoController.actualizarCliente(seleccionado.getCedula(),cliente)){
+                    mensajeInformacion("Cliente" +
+                            " Actualizado", "Se actualizo el Cliente correctamente");
+                    tablaClientes.getSelectionModel().clearSelection();
                     limpiarCampos();
-                    listaAdmins.clear();
-                    obtenerAdmins();
-                    tablaAdmins.refresh();
+                    listaClientes.clear();
+                    obtenerClientes();
+                    tablaClientes.refresh();
                 }}}}
 
-    //Metodo para eliminar un admin
+    //Metodo para eliminar un cliente
     @FXML
-    void eliminarAdmin(ActionEvent event) throws PersonaException {
-
-        Admin admin = tablaAdmins.getSelectionModel().getSelectedItem();
-        if (admin == null){
-            mensajeError("Error al eliminar", "Por favor, seleccione un admin de la lista para eliminar.");
+    void eliminarCliente(ActionEvent event) throws PersonaException {
+        Cliente cliente = tablaClientes.getSelectionModel().getSelectedItem();
+        if (cliente == null){
+            mensajeError("Error al eliminar", "Por favor, seleccione un cliente de la lista para eliminar.");
 
         }else {
             if (mensajeConfirmacion("Confirmacion de eliminacion","Eliminar Empleado",
                     "Desea eliminar el Empleado?")){
 
-                if (adminController.removeAdmin(admin) == 1){
+                if (empleadoController.removeCliente(cliente) == 1){
                     mensajeInformacion("Empleado Eliminado", "Se elimino el Empleado correctamente");
-                    tablaAdmins.getSelectionModel().clearSelection();
+                    tablaClientes.getSelectionModel().clearSelection();
                     limpiarCampos();
-                    listaAdmins.clear();
-                    obtenerAdmins();
-                    tablaAdmins.refresh();
+                    listaClientes.clear();
+                    obtenerClientes();
+                    tablaClientes.refresh();
                 }else{
-                    mensajeError("Error al eliminar", "Error al eliminar el admin");
+                    mensajeError("Error al eliminar", "Error al eliminar el cliente");
                 }}}}
 
     //Metodo para limpiar los campos
@@ -169,14 +180,12 @@ public class CrudAdmin {
         limpiarCampos();
     }
 
-    //Metodo para validar que los campos esten llenos
+    //Metodo para verificar si los campos estan llenos
     private boolean camposLlenos() {
         return !txtCedula.getText().isEmpty() &&
                 !txtCorreo.getText().isEmpty() &&
                 !txtEdad.getText().isEmpty() &&
                 !txtNombre.getText().isEmpty() &&
-                !txtPassword.getText().isEmpty() &&
-                !txtUsername.getText().isEmpty() &&
                 cbxGenero.getValue() != null;
     }
 
@@ -186,23 +195,20 @@ public class CrudAdmin {
         txtCorreo.clear();
         txtEdad.clear();
         txtNombre.clear();
-        txtPassword.clear();
-        txtUsername.clear();
         cbxGenero.setValue(null);
-        txtCedula.setEditable(true);
+        txtCedula.setEditable
+                (true);
         txtCorreo.setEditable(true);
     }
 
     //Metodo para llenar los campos
-    public void llenarCampos(Admin admin) {
-        if (admin != null) {
-            txtCedula.setText(admin.getCedula());
-            txtCorreo.setText(admin.getCorreo());
-            txtEdad.setText(String.valueOf(admin.getEdad()));
-            txtNombre.setText(admin.getNombre());
-            txtUsername.setText(admin.getUserName().getUsername());
-            txtPassword.setText(admin.getUserName().getPassword());
-            cbxGenero.setValue(admin.getGenero());
+    public void llenarCampos(Cliente cliente) {
+        if (cliente != null) {
+            txtCedula.setText(cliente.getCedula());
+            txtCorreo.setText(cliente.getCorreo());
+            txtEdad.setText(String.valueOf(cliente.getEdad()));
+            txtNombre.setText(cliente.getNombre());
+            cbxGenero.setValue(cliente.getGenero());
         }
     }
 
@@ -246,5 +252,3 @@ public class CrudAdmin {
             return false;
         }}
 }
-    
-

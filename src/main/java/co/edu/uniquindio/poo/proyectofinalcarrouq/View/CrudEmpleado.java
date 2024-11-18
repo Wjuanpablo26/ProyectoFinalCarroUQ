@@ -1,8 +1,7 @@
 package co.edu.uniquindio.poo.proyectofinalcarrouq.View;
-
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Controller.AdminController;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
-import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Admin;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Empleado;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.Genero;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.UserName;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Utils.TextFormatterUtils;
@@ -14,37 +13,73 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.time.LocalDate;
 import java.util.Optional;
 
-public class CrudAdmin {
-    
+
+public class CrudEmpleado {
+
     //Atributos
     @FXML
-    private TextField txtCedula, txtNombre, txtCorreo, txtEdad, txtUsername;
+    private ComboBox<Genero> cbxGenero;
+
+    @FXML
+    private TableColumn<Empleado, String> colCedula;
+
+    @FXML
+    private TableColumn<Empleado, String> colCorreo;
+
+    @FXML
+    private TableColumn<Empleado,Integer> colEdad;
+
+    @FXML
+    private TableColumn<Empleado, LocalDate> colFechaContratacion;
+
+    @FXML
+    private TableColumn<Empleado, Genero> colGenero;
+
+    @FXML
+    private TableColumn<Empleado, String> colNombre;
+
+    @FXML
+    private TableColumn<Empleado, String> colUserName;
+
+    @FXML
+    private DatePicker dtFechaCont;
+
+    @FXML
+    private TableView<Empleado> tablaEmpleados;
+
+    @FXML
+    private TextField txtCedula;
+
+    @FXML
+    private TextField txtCorreo;
+
+    @FXML
+    private TextField txtEdad;
+
+    @FXML
+    private TextField txtNombre;
+
     @FXML
     private PasswordField txtPassword;
+
     @FXML
-    private ComboBox<Genero> cbxGenero;
-    @FXML
-    private TableView<Admin> tablaAdmins;
-    @FXML
-    private TableColumn<Admin, String> colCedula, colNombre, colCorreo, colUserName;
-    @FXML
-    private TableColumn<Admin, Genero> colGenero;
-    @FXML
-    private TableColumn<Admin, Integer> colEdad;
+    private TextField txtUsername;
 
     private AdminController adminController;
-    ObservableList<Admin> listaAdmins = FXCollections.observableArrayList();
+    ObservableList<Empleado> listaEmpleados = FXCollections.observableArrayList();
 
     //Metodo para inicializar la vista
     @FXML
     private void initialize() {
         adminController = new AdminController();
         initView();
-        obtenerAdmins();
-        tablaAdmins.getItems().clear();
-        tablaAdmins.setItems(listaAdmins);
+        obtenerEmpleados();
+        tablaEmpleados.getItems().clear();
+        tablaEmpleados.setItems(listaEmpleados);
         selectionModel();
         // Formato para solo aceptar numeros.
         txtEdad.setTextFormatter(new TextFormatter<>(TextFormatterUtils:: integerFormat));
@@ -59,108 +94,115 @@ public class CrudAdmin {
         colGenero.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getGenero()));
         colEdad.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getEdad()).asObject());
         colUserName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUserName().getUsername()));
+        colFechaContratacion.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getFechaContratacion()));
 
         cbxGenero.setItems(FXCollections.observableArrayList(Genero.values()));
         cbxGenero.setItems(FXCollections.observableArrayList(Genero.values()));
     }
 
-    private void obtenerAdmins(){
-        listaAdmins.addAll(adminController.obtenerAdmins());
+    //Metodo para obtener los empleados
+    private void obtenerEmpleados(){
+        listaEmpleados.addAll(adminController.obtenerEmpleados());
     }
 
+    //Metodo para seleccionar un empleado
     private void selectionModel(){
         // It checks if the table is not empty.
-        if (tablaAdmins != null){
+        if (tablaEmpleados != null){
             // Method for selecting Admins.
-            tablaAdmins.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelecation)->{
+            tablaEmpleados.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelecation)->{
                 // A AdminsDto is created with the one selected from the table.
-                Admin admin = newSelecation;
-                if (admin != null){
+                Empleado empleado = newSelecation;
+                if (empleado != null){
                     // The method to fill the fields is called.
-                    llenarCampos(admin);
+                    llenarCampos(empleado);
                     // The txt becomes non-editable.
                     txtCedula.setEditable(false);
                     txtCorreo.setEditable(false);
                 }});
         }}
 
-    //Metodo para crear un admin
-    public Admin crearAdmin(){
-        Admin admin = new Admin();
-        admin.setCedula(txtCedula.getText());
-        admin.setCorreo(txtCorreo.getText());
-        admin.setNombre(txtNombre.getText());
-        admin.setEdad(Integer.parseInt(txtEdad.getText()));
-        admin.setGenero(cbxGenero.getValue());
+    //Metodo para crear un empleado
+    public Empleado crearEmpleado(){
+        Empleado empleado = new Empleado();
+        empleado.setCedula(txtCedula.getText());
+        empleado.setCorreo(txtCorreo.getText());
+        empleado.setNombre(txtNombre.getText());
+        empleado.setEdad(Integer.parseInt(txtEdad.getText()));
+        empleado.setGenero(cbxGenero.getValue());
+        empleado.setFechaContratacion(dtFechaCont.getValue());
 
         UserName userName = new UserName();
         userName.setUserName(txtUsername.getText());
         userName.setPassword(txtPassword.getText());
-        admin.setUserName(userName);
-        return admin;
+
+        empleado.setUserName(userName);
+
+        return empleado;
     }
 
-    //Metodo para agregar un admin
+    //Metodo para agregar un empleado
     @FXML
-    void agregarAdmin(ActionEvent event) throws PersonaException {
+    void agregarEmpleado(ActionEvent event) throws PersonaException {
         if (camposLlenos()){
-            int resultado = adminController.addAdmin(crearAdmin());
+            int resultado = adminController.addEmpleado(crearEmpleado());
 
             switch (resultado){
 
                 case 1:
 
-                    mensajeInformacion("Creacion Completada","Se Creo el Admin correctamente");
+                    mensajeInformacion("Creacion Completada","Se Creo el Empleado correctamente");
                     limpiarCampos();
-                    listaAdmins.clear();
-                    obtenerAdmins();
-                    tablaAdmins.refresh();
+                    listaEmpleados.clear();
+                    obtenerEmpleados();
+                    tablaEmpleados.refresh();
                     break;
 
                 case 2:
                     mensajeError("Error en la Creacion","Los Datos son invalidos o ya utilizados");
             }}}
 
-    //Metodo para editar un admin
+    //Metodo para editar un empleado
     @FXML
-    void editarAdmin(ActionEvent event) throws PersonaException {
-        Admin seleccionado = tablaAdmins.getSelectionModel().getSelectedItem();
+    void editarEmpleado(ActionEvent event) throws PersonaException {
+        Empleado seleccionado = tablaEmpleados.getSelectionModel().getSelectedItem();
         if (seleccionado == null){
-            mensajeError("Error al actualizar","Por favor, seleccione un admin de la lista para actualizar");
+            mensajeError("Error al actualizar","Por favor, seleccione un empleado de la lista para actualizar");
         }else {
-            if (mensajeConfirmacion("Confirmarcion de actualizar", "Actualizar Admin",
-                    "Desea Actualizar el Admin?")) {
-                Admin admin = crearAdmin();
-                if (adminController.actualizarAdmin(seleccionado.getCedula(),admin)){
-                    mensajeInformacion("Admin Actualizado", "Se actualizo el Admin correctamente");
-                    tablaAdmins.getSelectionModel().clearSelection();
+            if (mensajeConfirmacion("Confirmarcion de actualizar", "Actualizar Empleado",
+                    "Desea Actualizar el Empleado?")) {
+                Empleado empleado = crearEmpleado();
+                // The Admin Controller is called to start the update internally.
+                if (adminController.actualizarEmpleado(seleccionado.getCedula(),empleado)){
+                    mensajeInformacion("Empleado Actualizado", "Se actualizo el Empleado correctamente");
+                    tablaEmpleados.getSelectionModel().clearSelection();
                     limpiarCampos();
-                    listaAdmins.clear();
-                    obtenerAdmins();
-                    tablaAdmins.refresh();
+                    listaEmpleados.clear();
+                    obtenerEmpleados();
+                    tablaEmpleados.refresh();
                 }}}}
 
-    //Metodo para eliminar un admin
+    //Metodo para eliminar un empleado
     @FXML
-    void eliminarAdmin(ActionEvent event) throws PersonaException {
+    void eliminarEmpleado(ActionEvent event) throws PersonaException {
 
-        Admin admin = tablaAdmins.getSelectionModel().getSelectedItem();
-        if (admin == null){
-            mensajeError("Error al eliminar", "Por favor, seleccione un admin de la lista para eliminar.");
+        Empleado empleado = tablaEmpleados.getSelectionModel().getSelectedItem();
+        if (empleado == null){
+            mensajeError("Error al eliminar", "Por favor, seleccione un empleado de la lista para eliminar.");
 
         }else {
             if (mensajeConfirmacion("Confirmacion de eliminacion","Eliminar Empleado",
                     "Desea eliminar el Empleado?")){
 
-                if (adminController.removeAdmin(admin) == 1){
+                if (adminController.removeEmpleado(empleado) == 1){
                     mensajeInformacion("Empleado Eliminado", "Se elimino el Empleado correctamente");
-                    tablaAdmins.getSelectionModel().clearSelection();
+                    tablaEmpleados.getSelectionModel().clearSelection();
                     limpiarCampos();
-                    listaAdmins.clear();
-                    obtenerAdmins();
-                    tablaAdmins.refresh();
+                    listaEmpleados.clear();
+                    obtenerEmpleados();
+                    tablaEmpleados.refresh();
                 }else{
-                    mensajeError("Error al eliminar", "Error al eliminar el admin");
+                    mensajeError("Error al eliminar", "Error al eliminar el empleado");
                 }}}}
 
     //Metodo para limpiar los campos
@@ -169,7 +211,7 @@ public class CrudAdmin {
         limpiarCampos();
     }
 
-    //Metodo para validar que los campos esten llenos
+    //Metodo para verificar si los campos estan llenos
     private boolean camposLlenos() {
         return !txtCedula.getText().isEmpty() &&
                 !txtCorreo.getText().isEmpty() &&
@@ -177,7 +219,8 @@ public class CrudAdmin {
                 !txtNombre.getText().isEmpty() &&
                 !txtPassword.getText().isEmpty() &&
                 !txtUsername.getText().isEmpty() &&
-                cbxGenero.getValue() != null;
+                cbxGenero.getValue() != null &&
+                dtFechaCont.getValue() != null;
     }
 
     //Metodo para limpiar los campos
@@ -189,20 +232,22 @@ public class CrudAdmin {
         txtPassword.clear();
         txtUsername.clear();
         cbxGenero.setValue(null);
+        dtFechaCont.setValue(null);
         txtCedula.setEditable(true);
         txtCorreo.setEditable(true);
     }
 
-    //Metodo para llenar los campos
-    public void llenarCampos(Admin admin) {
-        if (admin != null) {
-            txtCedula.setText(admin.getCedula());
-            txtCorreo.setText(admin.getCorreo());
-            txtEdad.setText(String.valueOf(admin.getEdad()));
-            txtNombre.setText(admin.getNombre());
-            txtUsername.setText(admin.getUserName().getUsername());
-            txtPassword.setText(admin.getUserName().getPassword());
-            cbxGenero.setValue(admin.getGenero());
+    // Metodo para llenar los campos
+    public void llenarCampos(Empleado empleado) {
+        if (empleado != null) {
+            txtCedula.setText(empleado.getCedula());
+            txtCorreo.setText(empleado.getCorreo());
+            txtEdad.setText(String.valueOf(empleado.getEdad()));
+            txtNombre.setText(empleado.getNombre());
+            txtUsername.setText(empleado.getUserName().getUsername());
+            txtPassword.setText(empleado.getUserName().getPassword());
+            cbxGenero.setValue(empleado.getGenero());
+            dtFechaCont.setValue(empleado.getFechaContratacion());
         }
     }
 
@@ -245,6 +290,5 @@ public class CrudAdmin {
             mensaje.close();
             return false;
         }}
-}
     
-
+}
