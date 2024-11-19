@@ -20,8 +20,8 @@ public class AdminControllerTest {
 
     @Test
     public void testRegistrarAdminExitoso() throws PersonaException {
-        UserName userName = new UserName("john1","333");
-        Admin admin = new Admin("1234", "John Doe", "john.doe@example.com", Genero.MASCULINO,20,userName);
+        UserName userName = new UserName("john22","3321");
+        Admin admin = new Admin("1234", "John Doeaa", "john.doe@example.com", Genero.MASCULINO,20,userName);
         boolean resultado;
         if(adminController.addAdmin(admin) == 1){
             resultado = true;
@@ -33,8 +33,8 @@ public class AdminControllerTest {
 
     @Test
     public void testRegistrarAdminDuplicado() throws PersonaException {
-        UserName userName = new UserName("john1","333");
-        Admin admin1 = new Admin("1234", "John Doe", "john.doe@example.com", Genero.MASCULINO,20,userName);
+        UserName userName = new UserName("john22","3321");
+        Admin admin1 = new Admin("1234", "John Doea", "john.doe@example.com", Genero.MASCULINO,20,userName);
         boolean resultado;
         if(adminController.addAdmin(admin1) == 1){
             resultado = true;

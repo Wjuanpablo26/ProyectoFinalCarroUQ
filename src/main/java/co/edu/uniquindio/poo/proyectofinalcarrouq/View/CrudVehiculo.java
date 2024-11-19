@@ -706,7 +706,7 @@ public class CrudVehiculo {
             if (imagenSeleccionada != null) {
                 copiarImagenAdmin(imagenSeleccionada, vehiculo);
             } else {
-                vehiculo.setImagen("src/main/resources/Images/404.jpg");}
+                vehiculo.setImagen("src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/Images/404.jpg");}
 
             if (vehiculo == null) {
                 mensajeError("Error en la Creacion", "Los Datos son inválidos o ya utilizados");
@@ -927,7 +927,7 @@ public class CrudVehiculo {
     void eventoEliminar(ActionEvent event) throws VehiculoException {
         Vehiculo vehiculo = tblVehiculo.getSelectionModel().getSelectedItem();
         String ruta;
-        if (!vehiculo.getImagen().equals("src/main/resources/Images/404.jpg")) {
+        if (!vehiculo.getImagen().equals("src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/Images/404.jpg")) {
             ruta = vehiculo.getImagen();
         } else {
             ruta = "";
@@ -976,7 +976,7 @@ public class CrudVehiculo {
 
     //Metodo para copiar la imagen
     public void copiarImagenAdmin(File archivoImagen, Vehiculo vehiculo) {
-        String carpetaDestino = "src/main/resources/Images";
+        String carpetaDestino = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/Images";
         String extension = getExtension(archivoImagen.getName());
         Path destino = Path.of(carpetaDestino, vehiculo.getPlaca() + "." + extension);
 

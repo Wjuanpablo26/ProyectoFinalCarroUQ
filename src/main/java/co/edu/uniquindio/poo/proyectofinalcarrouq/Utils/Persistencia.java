@@ -513,7 +513,7 @@ public class Persistencia {
         ArrayList<String> contenido = ArchivoUtils.leerArchivos(rutaCamionetas);
 
         for (String linea : contenido){
-            String[] partes = linea.split("%%");
+            String[] partes = linea.split(" %% ");
 
             if(partes.length < 22){
                 continue; //si no hay suficientes partes, pasar a la siguiente linea
