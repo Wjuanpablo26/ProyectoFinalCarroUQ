@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="846.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
+    <tabs>
+        <Tab text="Empleados">
+            <content>
+                <fx:include source="CrudEmpleado.fxml" />
+            </content>
+        </Tab>
+        <Tab text="Admins">
+            <content>
+                <fx:include source="CrudAdmin.fxml" />
+            </content>
+        </Tab>
+        <Tab text="Reporte">
+            <content>
+                <fx:include source="Reporte.fxml" />
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
