@@ -11,18 +11,18 @@ import java.util.ArrayList;
 public class Persistencia {
 
     // Rutas de los archivos
-    public static final String rutaClientes = "src/main/resources/DataBase/clientes.txt";
-    public static final String rutaAdmins = "src/main/resources/DataBase/admins.txt";
-    public static final String rutaEmpleados = "src/main/resources/DataBase/empleado.txt";
-    public static final String rutaSedans = "src/main/resources/DataBase/sedan.txt";
-    public static final String rutaMotos = "src/main/resources/DataBase/motos.txt";
-    public static final String rutaDeportivos = "src/main/resources/DataBase/deportivo.txt";
-    public static final String rutaCamionetas = "src/main/resources/DataBase/camionetas.txt";
-    public static final String rutaPickUps = "src/main/resources/DataBase/pickUps.txt";
-    public static final String rutaVans = "src/main/resources/DataBase/vans.txt";
-    public static final String rutaBuses = "src/main/resources/DataBase/buses.txt";
-    public static final String rutaCamiones = "src/main/resources/DataBase/camiones.txt";
-    public static final String rutaVentas = "src/main/resources/DataBase/venta.txt";
+    public static final String rutaClientes = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/clientes.txt";
+    public static final String rutaAdmins = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/admins.txt";
+    public static final String rutaEmpleados = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/empleado.txt";
+    public static final String rutaSedans = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/sedan.txt";
+    public static final String rutaMotos = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/motos.txt";
+    public static final String rutaDeportivos = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/deportivo.txt";
+    public static final String rutaCamionetas = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/camionetas.txt";
+    public static final String rutaPickUps = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/pickUps.txt";
+    public static final String rutaVans = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/vans.txt";
+    public static final String rutaBuses = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/buses.txt";
+    public static final String rutaCamiones = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/camiones.txt";
+    public static final String rutaVentas = "src/main/resources/co/edu/uniquindio/poo/proyectofinalcarrouq/DataBase/venta.txt";
 
     // Método para guardar el Empleado
     public static void guardarEmpleados(ArrayList<Empleado> listaEmpleados) throws IOException {

@@ -28,8 +28,7 @@ public class Concesionario {
     private ArrayList<Vans> listaVans = new ArrayList<>();
     private ArrayList<PickUps> listaPickUps = new ArrayList<>();
 
-    //Listas Reportes
-    private ArrayList<Reporte> listaReportes = new ArrayList<>();
+
     private ArrayList<Venta> listaVentas = new ArrayList<>();
 
     //Constructor
@@ -123,14 +122,6 @@ public class Concesionario {
 
     public void setListaPickUps(ArrayList<PickUps> listaPickUps) {
         this.listaPickUps = listaPickUps;
-    }
-
-    public ArrayList<Reporte> getListaReportes() {
-        return this.listaReportes;
-    }
-
-    public void setListaReportes(ArrayList<Reporte> listaReportes) {
-        this.listaReportes = listaReportes;
     }
 
     public ArrayList<Venta> getListaVentas() {

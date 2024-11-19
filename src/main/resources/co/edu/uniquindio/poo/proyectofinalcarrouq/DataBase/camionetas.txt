@@ -1,0 +1,1 @@
+SSSS %% AAA %% false %% GGGG %% TRANSMISION %% 111.0 %% 111.0 %% 4 %% 44 %% ELECTRICO %% null %% COMPRADO %% true %% true %% false %% 1 %% false %% true %% true %% false %% true %% 111.0 %% 222 %% 1 %% 

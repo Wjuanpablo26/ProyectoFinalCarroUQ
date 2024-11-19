@@ -38,4 +38,10 @@ public class Empleado extends Persona {
         this.fechaContratacion = fechaContratacion;
     }
 
+    //Metodo to String
+    @Override
+    public String toString() {
+        return ("Nombre:"+ super.getNombre()+ "  " +" Cedula:"+ super.getCedula());
+    }
+
 }

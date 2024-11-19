@@ -83,7 +83,7 @@ public class ModelFactory {
     //Métodos del Empleado
     public int addEmpleado(Empleado empleado) throws PersonaException{
         if (empleado != null){
-            concesionario.removePersona(empleado);
+            concesionario.addPersona(empleado);
             salvarDatos();
             return 1;
         }else{

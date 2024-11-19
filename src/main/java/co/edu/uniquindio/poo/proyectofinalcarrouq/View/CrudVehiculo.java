@@ -5,7 +5,7 @@ import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.VehiculoException;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.*;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Abstract.Vehiculo;
 import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Combustible.*;
-import co.edu.uniquindio.poo.proyectofinalcarrouq   .Model.Enum.*;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -27,7 +27,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class CrudVehiculo {
-    
+
+    //Atributos
     @FXML
     private GridPane Deportivo;
 
@@ -283,38 +284,37 @@ public class CrudVehiculo {
     @FXML
     private TextField txtVelocidad;
 
+    //LLamados
     private EmpleadoController empleadoController;
     ObservableList<Vehiculo> listaVehiculo = FXCollections.observableArrayList();
     private File imagenSeleccionada;
 
+    //Metodos para inicializar
     @FXML
-    public void initialize(){
+    public void initialize() {
+
         empleadoController = new EmpleadoController();
         initView();
         obtenerVehiculos();
         tblVehiculo.getItems().clear();
         tblVehiculo.setItems(listaVehiculo);
         selection();
+
     }
 
-    //Método que configura la vista de la interfaz de usuario
+    //metodo para iniciar el view
     private void initView(){
         colPlaca.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlaca()));
-
         colModelo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getModelo()));
-
         colMarca.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMarca()));
-
         colTipoCambio.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTiposCambios()));
-
         colCombustible.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getCombustible().getTipoCombustible()));
-
-        colEstado.setCellValueFactory(cellData -> new  SimpleObjectProperty<>(cellData.getValue().getTipoEstado()));
+        colEstado.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getTipoEstado()));
 
         cbxCambio.setItems(FXCollections.observableArrayList(TipoCambios.values()));
 
-        cbxTipoVehiculo.getItems().addAll("Sedan", "Moto", "Deportivo", "Camioneta", "PickUps", "Vans", "Bus", "Camion");
-
+        cbxTipoVehiculo.getItems().addAll("Sedan", "Motos", "Deportivo", "Camionetas",
+                "PickUps", "Vans", "Buses", "Camiones");
         cbxTipoVehiculo.setOnAction(this::onVehiculoChange);
 
         cbxCombustible.setItems(FXCollections.observableArrayList(TipoCombustible.values()));
@@ -323,47 +323,48 @@ public class CrudVehiculo {
         cbxCamiones.setItems(FXCollections.observableArrayList(TipoCamiones.values()));
     }
 
-    //Método para añadir y obtener los vehículos a la lista
+    //Metodo para obtener los vehiculos
     private void obtenerVehiculos(){
         listaVehiculo.addAll(empleadoController.obtenerSedans());
         listaVehiculo.addAll(empleadoController.obtenerMotos());
         listaVehiculo.addAll(empleadoController.obtenerDeportivos());
         listaVehiculo.addAll(empleadoController.obtenerCamionetas());
-        listaVehiculo.addAll(empleadoController.obtenerPicKups());
+        listaVehiculo.addAll(empleadoController.obtenerPickups());
         listaVehiculo.addAll(empleadoController.obtenerVan());
         listaVehiculo.addAll(empleadoController.obtenerBuses());
         listaVehiculo.addAll(empleadoController.obtenerCamiones());
     }
 
+    //Metodo para Habilitar y desahabilitar campos vehiculo
     @FXML
-    void onVehiculoChange(ActionEvent event){
-        //Parte del método que reestablece la visibilidad de los componentes y habilita los campos necesarios al inicio del método
+    void onVehiculoChange(ActionEvent event) {
+        // Restablecer la visibilidad de todos los componentes y habilitar los campos necesarios al inicio del método
         Deportivo.setVisible(false);
         VCSegAvanzada.setVisible(false);
         VConfort.setVisible(false);
         idCapCajaCarga.setVisible(false);
         idCamiones.setVisible(false);
         IdNumEjes.setVisible(false);
-        txtCapacidadMaletero.setVisible(false);
-        txtNumPasajeros.setVisible(false);
-        txtPuertas.setVisible(false);
+        txtCapacidadMaletero.setVisible(true);
+        txtNumPasajeros.setDisable(false);
+        txtPuertas.setDisable(false);
 
-        //Parte del método que habilita los TadioButtons en los grupos "tiene4x4" y "tieneVelocidad"
-        for (Toggle toggle: tiene4x4.getToggles()){
-            ((RadioButton)toggle).setDisable(false);
+        // Habilitar todos los RadioButtons en los grupos "tiene4x4" y "tieneVelocidad"
+        for (Toggle toggle : tiene4x4.getToggles()) {
+            ((RadioButton) toggle).setDisable(false);
         }
-        for (Toggle toggle: tieneVelocidad.getToggles()){
+        for (Toggle toggle : tieneVelocidad.getToggles()) {
             ((RadioButton) toggle).setDisable(false);
         }
 
-        //Parte del método que obtiene al vehículo seleccionado
+        // Obtener el tipo de vehículo seleccionado
         String selectedVehicle = String.valueOf(cbxTipoVehiculo.getValue());
 
         switch (selectedVehicle) {
             case "Sedan":
                 VCSegAvanzada.setVisible(true);
                 VConfort.setVisible(true);
-                for (Toggle toggle: tiene4x4.getToggles()){
+                for (Toggle toggle : tiene4x4.getToggles()) {
                     ((RadioButton) toggle).setDisable(true);
                 }
                 break;
@@ -371,15 +372,15 @@ public class CrudVehiculo {
             case "Motos":
                 txtNumPasajeros.setDisable(true);
                 txtPuertas.setDisable(true);
-                txtCapacidadMaletero.setVisible(true);
+                txtCapacidadMaletero.setVisible(false);
                 break;
 
             case "Deportivo":
                 Deportivo.setVisible(true);
-                txtCapacidadMaletero.setVisible(true);
+                txtCapacidadMaletero.setVisible(false);
                 break;
 
-            case "Camioneta":
+            case "Camionetas":
                 VCSegAvanzada.setVisible(true);
                 VConfort.setVisible(true);
                 break;
@@ -388,98 +389,101 @@ public class CrudVehiculo {
                 VConfort.setVisible(true);
                 idCapCajaCarga.setVisible(true);
                 txtCapacidadMaletero.setVisible(false);
-                for (Toggle toggle: tieneVelocidad.getToggles()){
+                for (Toggle toggle : tieneVelocidad.getToggles()) {
                     ((RadioButton) toggle).setDisable(true);
                 }
                 break;
-            
+
             case "Vans":
                 VConfort.setVisible(true);
-                for(Toggle toggle: tieneVelocidad.getToggles()){
-                    ((RadioButton)toggle).setDisable(true);
+                for (Toggle toggle : tieneVelocidad.getToggles()) {
+                    ((RadioButton) toggle).setDisable(true);
                 }
-                for (Toggle toogle: tiene4x4.getToggles()){
-                    ((RadioButton)toogle).setDisable(true);
+                for (Toggle toggle : tiene4x4.getToggles()) {
+                    ((RadioButton) toggle).setDisable(true);
                 }
                 break;
 
-            case "Bus":
+            case "Buses":
                 VConfort.setVisible(true);
                 IdNumEjes.setVisible(true);
-                for(Toggle toggle: tieneVelocidad.getToggles()){
-                    ((RadioButton)toggle).setDisable(true);
+                for (Toggle toggle : tieneVelocidad.getToggles()) {
+                    ((RadioButton) toggle).setDisable(true);
                 }
-                for (Toggle toggle: tiene4x4.getToggles()){
-                    ((RadioButton)toggle).setDisable(true);
+                for (Toggle toggle : tiene4x4.getToggles()) {
+                    ((RadioButton) toggle).setDisable(true);
                 }
                 break;
 
-            case "Camion":
+            case "Camiones":
                 idCamiones.setVisible(true);
                 txtNumPasajeros.setDisable(true);
                 txtPuertas.setDisable(true);
                 txtCapacidadMaletero.setVisible(false);
                 break;
-        
+
             default:
+                // Opcional: Agregar manejo para tipos de vehículos adicionales o no definidos
                 break;
         }
     }
 
-    //Método que cambia la visibilidad de los elementos en función del comboBox de TipoCombustible
+    //Metodo para habilitar y deshabilitar campos de combustible
     @FXML
-    void onCombustibleChange(ActionEvent event){
+    void onCombustibleChange(ActionEvent event) {
         String selectedFuel = String.valueOf(cbxCombustible.getValue());
-        if ("ELÉCTRICO".equals(selectedFuel)){
+
+        if ("ELECTRICO".equals(selectedFuel)) {
             electricFields.setVisible(true);
             hybridFields.setVisible(false);
             hybridFields2.setVisible(false);
-        }else if("HÍBRIDO".equals(selectedFuel)){
+        } else if ("HIBRIDO".equals(selectedFuel)) {
             electricFields.setVisible(false);
             hybridFields.setVisible(true);
-            esEnchufable.selectedToggleProperty().addListener((observable, oldToggle, newToggle) ->{
-                if (newToggle == rdEsEnchufableNo){
-                    hybridFields2.setVisible(true);
-                }else{
-                    hybridFields2.setVisible(false);
+            esEnchufable.selectedToggleProperty().addListener((observable, oldToggle, newToggle) -> {
+                if (newToggle == rdEsEnchufableNo) {
+                    hybridFields2.setVisible(true);     // Mostrar el GridPane
+
+                } else {
+                    hybridFields2.setVisible(false);    // Ocultar el GridPane
                 }
             });
-        }else{
+        } else {
             electricFields.setVisible(false);
             hybridFields.setVisible(false);
             hybridFields2.setVisible(false);
         }
     }
 
-    //Método que maneja la selección de los elementos dentro de la tabla
-    public void selection(){
-        tblVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)-> {
-            if(newValue != null){
+    //Metodo de seleccion
+    private void selection(){
+        tblVehiculo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
                 limpiarCampos();
                 txtPlaca.setEditable(false);
                 cbxTipoVehiculo.setDisable(true);
-                mostrarDatosVehiculo(newValue);
+                mostrarDatosVehiculos(newValue);
             }
         });
     }
 
-    //Método que muestra los datos del Vehiculo
-    private void mostrarDatosVehiculo(Vehiculo vehiculo){
+    //Metodo para mostrar los datos de los vehiculos
+    private void mostrarDatosVehiculos(Vehiculo vehiculo){
         txtPlaca.setText(vehiculo.getPlaca());
         txtMarca.setText(vehiculo.getMarca());
         txtModelo.setText(vehiculo.getModelo());
         cbxCambio.setValue(vehiculo.getTiposCambios());
         txtVelocidad.setText(String.valueOf(vehiculo.getVelocidadMax()));
         txtCilindraje.setText(String.valueOf(vehiculo.getCilindraje()));
-        esNuevo.selectToggle(vehiculo.isEsNuevo()? rdEsNuevoSi : rdEsNuevoNo); //Ejemplo de selección
+        esNuevo.selectToggle(vehiculo.isEsNuevo() ? rdEsNuevoSi : rdEsNuevoNo); // Ejemplo de Seleccion
         imagenView.setImage(new Image(new File(vehiculo.getImagen()).toURI().toString()));
 
         cbxCombustible.setValue(vehiculo.getCombustible().getTipoCombustible());
         if (vehiculo.getCombustible().getTipoCombustible().equals(TipoCombustible.ELECTRICO)){
             Electrico electrico = (Electrico) vehiculo.getCombustible();
             txtDuracionBateria.setText(String.valueOf(electrico.getAutonomia()));
-            txtCargaRapida.setText(String.valueOf(0));
-        }else if (vehiculo.getCombustible().getTipoCombustible().equals(TipoCombustible.HIBRIDO)){
+            txtCargaRapida.setText(String.valueOf(electrico.getTiempoCarga()));
+        } else if (vehiculo.getCombustible().getTipoCombustible().equals(TipoCombustible.HIBRIDO)) {
             Hibrido hibrido = (Hibrido) vehiculo.getCombustible();
             esEnchufable.selectToggle(hibrido.isEsEnchufable() ? rdEsEnchufableSi : rdEsEnchufableNo);
             esHibridoLigero.selectToggle(hibrido.isEsHibridoLigero() ? esHibridoSi : esHibridoNo);
@@ -489,10 +493,10 @@ public class CrudVehiculo {
             Moto moto = (Moto) vehiculo;
             cbxTipoVehiculo.setValue("Motos");
 
-        }else if(vehiculo instanceof Sedan){
+        }else if (vehiculo instanceof Sedan){
             Sedan sedan = (Sedan) vehiculo;
             cbxTipoVehiculo.setValue("Sedan");
-            //Configuración de los campos del Sedan
+            // Configuramos los campos específicos de un Sedan
             txtNumPasajeros.setText(String.valueOf(sedan.getNumPasajeros()));
             txtPuertas.setText(String.valueOf(sedan.getNumPuertas()));
             txtCapacidadMaletero.setText(String.valueOf(sedan.getCapacidadMaletero()));
@@ -508,16 +512,18 @@ public class CrudVehiculo {
         }else if(vehiculo instanceof Deportivo){
             Deportivo deportivo = (Deportivo) vehiculo;
             cbxTipoVehiculo.setValue("Deportivo");
-            //Configuración de los campos del Deportivo
-            txtNumPasajeros.setText(String.valueOf(deportivo.getNumPuertas()));
+            // Configuración de campos específicos de un Deportivo
+            txtNumPasajeros.setText(String.valueOf(deportivo.getNumPasajeros()));
+            txtPuertas.setText(String.valueOf(deportivo.getNumPuertas()));
             txtBolsaAireDep.setText(String.valueOf(deportivo.getNumBolsasAire()));
-            txtCaballosFuerzaDep.setText(String.valueOf(deportivo.getTiempoAceleracion()));
+            txtCaballosFuerzaDep.setText(String.valueOf(deportivo.getNumCaballosFuerza()));
+            txtTiempAceleDep.setText(String.valueOf(deportivo.getTiempoAceleracion()));
             tieneAerodinamicaDep.selectToggle(deportivo.isTieneAerodinamicaMejorada() ? tieneAerodinamicaSi : tieneAerodinamicaNo);
 
-        }else if(vehiculo instanceof Camioneta){
-            Camioneta camioneta =(Camioneta) vehiculo;
-            cbxTipoVehiculo.setValue("Camioneta");
-            //Configuración de los campos de la Camioneta
+        }else if (vehiculo instanceof Camioneta){
+            Camioneta camioneta  = (Camioneta) vehiculo;
+            cbxTipoVehiculo.setValue("Camionetas");
+
             txtNumPasajeros.setText(String.valueOf(camioneta.getNumPasajeros()));
             txtPuertas.setText(String.valueOf(camioneta.getNumPuertas()));
             txtCapacidadMaletero.setText(String.valueOf(camioneta.getCapacidadMaletero()));
@@ -531,10 +537,10 @@ public class CrudVehiculo {
             tieneSensorTraf.selectToggle(camioneta.isTieneSensorTraficoCruzado() ? tieneSensorTraficoSi : tieneSensorTraficoNo);
             tieneAsistente.selectToggle(camioneta.isTieneAsistentePermanencia() ? rdTieneAsistenciaSi : rdTieneAsistenciaNo);
 
-        }else if(vehiculo instanceof PickUps){
-            PickUps pickUp= (PickUps)vehiculo;
+        }else if (vehiculo instanceof PickUps){
+            PickUps pickUp =(PickUps) vehiculo;
             cbxTipoVehiculo.setValue("PickUps");
-            //Configuración de los campos de la PickUps
+
             txtNumPasajeros.setText(String.valueOf(pickUp.getNumPasajeros()));
             txtPuertas.setText(String.valueOf(pickUp.getNumPuertas()));
             txtCapacidadCarga.setText(String.valueOf(pickUp.getCapacidadCajaCarga()));
@@ -544,10 +550,8 @@ public class CrudVehiculo {
             tieneABS.selectToggle(pickUp.isTieneABS() ? rdTieneABSSi : rdTieneABSNo);
             tiene4x4.selectToggle(pickUp.isEs4x4() ? rdTiene4X4Si : rdTiene4X4No);
 
-        }else if(vehiculo instanceof Vans){
-            Vans vans= (Vans) vehiculo;
-            cbxTipoVehiculo.setValue("Vans");
-            //Configuración de los campos de la Vans
+        } else if (vehiculo instanceof Vans) {
+            Vans vans = (Vans) vehiculo;
             cbxTipoVehiculo.setValue("Vans");
             txtNumPasajeros.setText(String.valueOf(vans.getNumPasajeros()));
             txtPuertas.setText(String.valueOf(vans.getNumPuertas()));
@@ -557,164 +561,165 @@ public class CrudVehiculo {
             tieneCamara.selectToggle(vans.isTieneCamaraReversa() ? rdCamaraReversaSi : rdCamaraReversaNo);
             tieneABS.selectToggle(vans.isTieneABS() ? rdTieneABSSi : rdTieneABSNo);
 
-        }else if(vehiculo instanceof Bus){
-            Bus bus= (Bus) vehiculo;
-            cbxTipoVehiculo.setValue("Bus");
-            //Configuración de los campos del Bus
-            txtNumPasajeros.setText(String.valueOf(bus.getNumPasajeros()));
-            txtPuertas.setText(String.valueOf(bus.getNumPuertas()));
-            txtCapacidadMaletero.setText(String.valueOf(bus.getCapacidadMaletero()));
-            txtNumEjes.setText(String.valueOf(bus.getNumEjes()));
-            txtNumBolsasAire.setText(String.valueOf(bus.getNumeroBolsaAire()));
-            tieneAireAcon.selectToggle(bus.isTieneAcondicionado() ? aireAcondicionadoSi : aireAcondicionadoNo);
-            tieneCamara.selectToggle(bus.isTieneCamaraReversa() ? rdCamaraReversaSi : rdCamaraReversaNo);
-            tieneABS.selectToggle(bus.isTieneABS() ? rdTieneABSSi : rdTieneABSNo);
+        } else if (vehiculo instanceof Bus) {
+            Bus buses = (Bus) vehiculo;
+            cbxTipoVehiculo.setValue("Buses");
+            // Configuración de campos específicos de Buses
+            txtNumPasajeros.setText(String.valueOf(buses.getNumPasajeros()));
+            txtPuertas.setText(String.valueOf(buses.getNumPuertas()));
+            txtCapacidadMaletero.setText(String.valueOf(buses.getCapacidadMaletero()));
+            txtNumEjes.setText(String.valueOf(buses.getNumEjes()));
+            txtNumBolsasAire.setText(String.valueOf(buses.getNumeroBolsaAire()));
+            tieneAireAcon.selectToggle(buses.isTieneAcondicionado() ? aireAcondicionadoSi : aireAcondicionadoNo);
+            tieneCamara.selectToggle(buses.isTieneCamaraReversa() ? rdCamaraReversaSi : rdCamaraReversaNo);
+            tieneABS.selectToggle(buses.isTieneABS() ? rdTieneABSSi : rdTieneABSNo);
 
-        }else if(vehiculo instanceof Camion){
-            Camion camion= (Camion) vehiculo;
-            cbxTipoVehiculo.setValue("Camion");
-            //Configuración de los campos del Camion
-            txtCapacidadCarga.setText(String.valueOf(camion.getCapCarga()));
-            txtNumEjes.setText(String.valueOf(camion.getNumeroEjes()));
-            tieneAireAconCam.selectToggle(camion.isTieneAireAcondicionado() ? rdAcondicionCamSi : rdAcondicionCamNo);
-            tieneFrenosAire.selectToggle(camion.isTieneFrenosAire() ? rdFrenosAireSi : rdFrenosAireNo);
-            tieneABS1Cam.selectToggle(camion.isTieneABS()? rdTieneAbsCamSi : rdTieneAbsCamNo);
-            cbxCamiones.setValue(camion.getTipoCamion());
-        }
-    }
+        } else if (vehiculo instanceof Camion) {
+            Camion camiones = (Camion) vehiculo;
+            cbxTipoVehiculo.setValue("Camiones");
+            // Configuración de campos específicos de Camiones
+            txtCapacidadCarga.setText(String.valueOf(camiones.getCapCarga()));
+            txtNumEjes.setText(String.valueOf(camiones.getNumeroEjes()));
+            tieneAireAconCam.selectToggle(camiones.isTieneAireAcondicionado() ? rdAcondicionCamSi : rdAcondicionCamNo);
+            tieneFrenosAire.selectToggle(camiones.isTieneFrenosAire() ? rdFrenosAireSi : rdFrenosAireNo);
+            tieneABS1Cam.selectToggle(camiones.isTieneABS() ? rdTieneAbsCamSi : rdTieneAbsCamNo);
+            cbxCamiones.setValue(camiones.getTipoCamion());
+        }}
 
-    //Método para actualizar el evento
+    //Metodo para actualizar el vehiculo
     @FXML
     void eventoActualizar(ActionEvent event) throws VehiculoException {
+
         Vehiculo vehiculoAntiguo = tblVehiculo.getSelectionModel().getSelectedItem();
         if (verificarCampos() && vehiculoAntiguo != null) {
             Vehiculo vehiculoActualizado = crearVehiculo(cbxTipoVehiculo.getValue());
             vehiculoActualizado.setTipoEstado(vehiculoAntiguo.getTipoEstado());
 
-        if (imagenSeleccionada != null) {
-            copiarImagenAdmin(imagenSeleccionada,vehiculoActualizado);
-        }else{
-            vehiculoActualizado.setImagen(vehiculoAntiguo.getImagen());}
+            if (imagenSeleccionada != null) {
+                copiarImagenAdmin(imagenSeleccionada,vehiculoActualizado);
+            }else{
+                vehiculoActualizado.setImagen(vehiculoAntiguo.getImagen());}
 
-        if (vehiculoAntiguo.getTipoEstado().equals(TipoEstado.EN_POSESION)){
-            if (vehiculoActualizado instanceof Moto){
-                Moto moto = (Moto) vehiculoActualizado;
+            if (vehiculoAntiguo.getTipoEstado().equals(TipoEstado.EN_POSESION)){
+                if (vehiculoActualizado instanceof Moto){
+                    Moto moto = (Moto) vehiculoActualizado;
                     if (empleadoController.actualizarMoto(vehiculoAntiguo.getPlaca(),moto)){
-                        mensajeInformacion("Vehículo actualizado","El vehículo se ha actualizado con éxito");
+                        mensajeInformacion("Vehiculo Actualizado","El vehiculo se ah actualizado con exito");
                         limpiarCampos();
                         listaVehiculo.clear();
                         obtenerVehiculos();
                         tblVehiculo.refresh();
                     }else{
-                        mensajeError("Error actualización","El vehiculo no se ha podido actualizar");
+                        mensajeError("Error actualizacion","El vehiculo no se ah podido actualizas");
                     }
                 } else if (vehiculoActualizado instanceof Sedan) {
                     Sedan sedan = (Sedan) vehiculoActualizado;
                     if (empleadoController.actualizarSedan(vehiculoAntiguo.getPlaca(),sedan)){
-                        mensajeInformacion("Vehículo actualizado","El vehículo se ha actualizado con éxito");
+                        mensajeInformacion("Vehiculo Actualizado","El vehiculo se ah actualizado con exito");
                         limpiarCampos();
                         listaVehiculo.clear();
                         obtenerVehiculos();
                         tblVehiculo.refresh();
                     }else{
-                        mensajeError("Error actualización","El vehículo no se ha podido actualizar");
+                        mensajeError("Error actualizacion","El vehiculo no se ah podido actualizas");
                     }
                 } else if (vehiculoActualizado instanceof Deportivo) {
                     Deportivo deportivo = (Deportivo) vehiculoActualizado;
                     if (empleadoController.actualizarDeportivo(vehiculoAntiguo.getPlaca(),deportivo)){
-                        mensajeInformacion("Vehículo actualizado","El vehículo se ha actualizado con éxito");
+                        mensajeInformacion("Vehiculo Actualizado","El vehiculo se ah actualizado con exito");
                         limpiarCampos();
                         listaVehiculo.clear();
                         obtenerVehiculos();
                         tblVehiculo.refresh();
                     }else{
-                        mensajeError("Error actualización","El vehiculo no se ha podido actualizar");
+                        mensajeError("Error actualizacion","El vehiculo no se ah podido actualizas");
                     }
                 } else if (vehiculoActualizado instanceof Camioneta) {
-                    Camioneta camioneta = (Camioneta) vehiculoActualizado;
-                    if (empleadoController.actualizarCamioneta(vehiculoAntiguo.getPlaca(),camioneta)){
-                        mensajeInformacion("Vehiculo actualizado","El vehículo se ha actualizado con éxito");
+                    Camioneta camionetas = (Camioneta) vehiculoActualizado;
+                    if (empleadoController.actualizarCamioneta(vehiculoAntiguo.getPlaca(),camionetas)){
+                        mensajeInformacion("Vehiculo Actualizado","El vehiculo se ah actualizado con exito");
                         limpiarCampos();
                         listaVehiculo.clear();
                         obtenerVehiculos();
                         tblVehiculo.refresh();
                     }else{
-                        mensajeError("Error actualización","El vehículo no se ha podido actualizar");
+                        mensajeError("Error actualizacion","El vehiculo no se ah podido actualizas");
                     }
                 } else if (vehiculoActualizado instanceof PickUps) {
                     PickUps pickUps = (PickUps) vehiculoActualizado;
                     if (empleadoController.actualizarPickUp(vehiculoAntiguo.getPlaca(),pickUps)){
-                        mensajeInformacion("Vehículo actualizado","El vehículo se ha actualizado con éxito");
+                        mensajeInformacion("Vehiculo Actualizado","El vehiculo se ah actualizado con exito");
                         limpiarCampos();
                         listaVehiculo.clear();
                         obtenerVehiculos();
                         tblVehiculo.refresh();
                     }else{
-                        mensajeError("Error actualización","El vehículo no se ha podido actualizar");
+                        mensajeError("Error actualizacion","El vehiculo no se ah podido actualizas");
                     }
                 } else if (vehiculoActualizado instanceof Vans) {
                     Vans vans = (Vans) vehiculoActualizado;
                     if (empleadoController.actualizarVan(vehiculoAntiguo.getPlaca(),vans)){
-                        mensajeInformacion("Vehículo actualizado","El vehiculo se ha actualizado con éxito");
+                        mensajeInformacion("Vehiculo Actualizado","El vehiculo se ah actualizado con exito");
                         limpiarCampos();
                         listaVehiculo.clear();
                         obtenerVehiculos();
                         tblVehiculo.refresh();
                     }else{
-                        mensajeError("Error actualización","El vehículo no se ha podido actualizar");
+                        mensajeError("Error actualizacion","El vehiculo no se ah podido actualizas");
                     }
                 } else if (vehiculoActualizado instanceof Bus) {
-                    Bus bus = (Bus) vehiculoActualizado;
-                    if (empleadoController.actualizarBus(vehiculoAntiguo.getPlaca(),bus)){
-                        mensajeInformacion("Vehículo actualizado","El vehículo se ha actualizado con éxito");
+                    Bus buses = (Bus) vehiculoActualizado;
+                    if (empleadoController.actualizarBus(vehiculoAntiguo.getPlaca(),buses)){
+                        mensajeInformacion("Vehiculo Actualizado","El vehiculo se ah actualizado con exito");
                         limpiarCampos();
                         listaVehiculo.clear();
                         obtenerVehiculos();
                         tblVehiculo.refresh();
                     }else{
-                        mensajeError("Error actualización","El vehículo no se ha podido actualizar");
+                        mensajeError("Error actualizacion","El vehiculo no se ah podido actualizas");
                     }
                 } else if (vehiculoActualizado instanceof  Camion) {
-                    Camion camion = (Camion) vehiculoActualizado;
-                    if (empleadoController.actualizarCamion(vehiculoAntiguo.getPlaca(),camion)){
-                        mensajeInformacion("Vehículo actualizado","El vehículo se ha actualizado con éxito");
+                    Camion camiones = (Camion) vehiculoActualizado;
+                    if (empleadoController.actualizarCamion(vehiculoAntiguo.getPlaca(),camiones)){
+                        mensajeInformacion("Vehiculo Actualizado","El vehiculo se ah actualizado con exito");
                         limpiarCampos();
                         listaVehiculo.clear();
                         obtenerVehiculos();
                         tblVehiculo.refresh();
                     }else{
-                        mensajeError("Error actualización","El vehículo no se ha podido actualizar");
+                        mensajeError("Error actualizacion","El vehiculo no se ah podido actualizas");
                     }}
-                }else{
-                    mensajeError("Error actualización","Vehículo no está en posesión");
-                }
-                }else{
-                    mensajeError("Error actualización","Seleccione un vehículo de la tabla");
-                }}
-
-    //Método para agregar el evento
-    @FXML
-    void eventoAgregar(ActionEvent event) throws VehiculoException{
-        if(verificarCampos()){
-            Vehiculo vehiculo= crearVehiculo(cbxTipoVehiculo.getValue());
-
-            if(imagenSeleccionada!= null){
-                copiarImagenAdmin(imagenSeleccionada, vehiculo);
             }else{
-                vehiculo.setImagen("src/main/resources/Images/404.jpg");
+                mensajeError("Error actualizacion","Vehiculo no esta en posesion");
             }
+        }else{
+            mensajeError("Error actualizacion","Seleccione un vehiculo de la tabla");
+        }}
 
-            if (vehiculo== null){
-                mensajeError("Error en la creación", "Los datos son inválidos o ya fueron utilizados");
+    //Metodo para el evento de agregar
+    @FXML
+    void eventoAgregar(ActionEvent event) throws VehiculoException {
+        if (verificarCampos()) {
+            Vehiculo vehiculo = crearVehiculo(cbxTipoVehiculo.getValue());
+            vehiculo.setTipoEstado(TipoEstado.EN_POSESION);
+
+            if (imagenSeleccionada != null) {
+                copiarImagenAdmin(imagenSeleccionada, vehiculo);
+            } else {
+                vehiculo.setImagen("src/main/resources/Images/404.jpg");}
+
+            if (vehiculo == null) {
+                mensajeError("Error en la Creacion", "Los Datos son inválidos o ya utilizados");
                 return;
             }
-            
-            boolean exito= false;
-            String tipoVehiculo= vehiculo.getClass().getSimpleName();//Esto es para el mensaje
-            //Parte del método que llama en EmpleadoController según el tip de vehículo
-            if(vehiculo instanceof Sedan){
-                exito=(empleadoController.addSedan((Sedan)vehiculo)==1);
-            }else if(vehiculo instanceof Moto){
+
+            boolean exito = false;
+            String tipoVehiculo = vehiculo.getClass().getSimpleName(); // Para el mensaje
+
+            // Llama al método correspondiente en empleadoController según el tipo de vehículo
+            if (vehiculo instanceof Sedan) {
+                exito = (empleadoController.addSedan((Sedan) vehiculo) == 1);
+            } else if (vehiculo instanceof Moto) {
                 exito = (empleadoController.addMoto((Moto) vehiculo) == 1);
             } else if (vehiculo instanceof Deportivo) {
                 exito = (empleadoController.addDeportivo((Deportivo) vehiculo) == 1);
@@ -730,26 +735,27 @@ public class CrudVehiculo {
                 exito = (empleadoController.addCamion((Camion) vehiculo) == 1);
             }
 
-            if(exito){
-                mensajeInformacion("Creación completada", "Se creó el "+ tipoVehiculo+ " correctamente");
+            if (exito) {
+                mensajeInformacion("Creación Completada", "Se creó el " + tipoVehiculo + " correctamente");
                 limpiarCampos();
                 listaVehiculo.clear();
                 obtenerVehiculos();
                 tblVehiculo.refresh();
-            }else{
-                mensajeError("Error en la creación", "Los datos son inválidos o ya fueron utilizados");
+            } else {
+                mensajeError("Error en la Creación", "Los Datos son inválidos o ya utilizados");
             }
         }else{
-            mensajeError("Error en la creación", "Los campos no están completos");
+            mensajeError("Error en la Creación", "Los Campos no Estan Completos");
         }
+
     }
 
-
-    //Metodo para crear un vehiculo
-    private Vehiculo crearVehiculo(String vehiculo){
+    //Metodo para crear un vehiculo 
+    private Vehiculo crearVehiculo(String vehiculo) {
 
         switch (vehiculo) {
-            //Caso para crear un vehiculo moto
+
+            //Caso de Motos
             case "Motos":
                 Moto moto = new Moto();
                 moto.setPlaca(txtPlaca.getText());
@@ -761,8 +767,8 @@ public class CrudVehiculo {
                 moto.setCilindraje(Float.parseFloat(txtCilindraje.getText()));
                 moto.setCombustible(crearCombustible());
                 return moto;
-        
-            //Caso para crear un vehiculo sedan
+
+            //Caso de Sedan
             case "Sedan":
                 Sedan sedan = new Sedan();
 
@@ -787,7 +793,7 @@ public class CrudVehiculo {
                 sedan.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
                 return sedan;
 
-            //Caso para crear un vehiculo deportivo
+            //Caso de Deportivos
             case "Deportivo":
                 Deportivo deportivo = new Deportivo();
                 deportivo.setPlaca(txtPlaca.getText());
@@ -806,7 +812,7 @@ public class CrudVehiculo {
                 deportivo.setTieneAerodinamicaMejorada(tieneAerodinamicaDep.getSelectedToggle().equals(tieneAerodinamicaSi));
                 return deportivo;
 
-            //Caso para crear un vehiculo Camioneta
+            //Caso de Camionetas
             case "Camionetas":
                 Camioneta camioneta = new Camioneta();
                 camioneta.setPlaca(txtPlaca.getText());
@@ -831,7 +837,7 @@ public class CrudVehiculo {
                 camioneta.setTieneAsistentePermanencia(tieneAsistente.getSelectedToggle().equals(rdTieneAsistenciaSi));
                 return camioneta;
 
-            //Caso para crear un vehiculo PickUps
+            //Caso de PickUps
             case "PickUps":
                 PickUps pickUp = new PickUps();
                 pickUp.setPlaca(txtPlaca.getText());
@@ -852,7 +858,7 @@ public class CrudVehiculo {
                 pickUp.setEs4x4(tiene4x4.getSelectedToggle().equals(rdTiene4X4Si));
                 return pickUp;
 
-            //Caso para crear un vehiculo Vans
+            //Caso de Vans
             case "Vans":
                 Vans vans = new Vans();
                 vans.setPlaca(txtPlaca.getText());
@@ -872,7 +878,7 @@ public class CrudVehiculo {
                 vans.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
                 return vans;
 
-            //Caso para crear un vehiculo Bus
+            //Caso de Buses
             case "Buses":
                 Bus buses = new Bus();
                 buses.setPlaca(txtPlaca.getText());
@@ -893,7 +899,7 @@ public class CrudVehiculo {
                 buses.setTieneABS(tieneABS.getSelectedToggle().equals(rdTieneABSSi));
                 return buses;
 
-            //Caso para crear un vehiculo Camion
+            //Caso de Camiones
             case "Camiones":
                 Camion camiones = new Camion();
                 camiones.setPlaca(txtPlaca.getText());
@@ -912,20 +918,18 @@ public class CrudVehiculo {
                 camiones.setCombustible(crearCombustible());
                 return camiones;
 
-            //Default para retornar null
+            
             default:
-                return null;
-        }
-    }
+                return null;}}
 
-    //Evento para eliminar un vehiculo
+    //Metodo para la accion de elimia¿nar
     @FXML
-    void eventoEliminar(ActionEvent event) throws VehiculoException{
+    void eventoEliminar(ActionEvent event) throws VehiculoException {
         Vehiculo vehiculo = tblVehiculo.getSelectionModel().getSelectedItem();
         String ruta;
-        if(!vehiculo.getImagen().equals("src/main/resources/Images/404.jpg")){
+        if (!vehiculo.getImagen().equals("src/main/resources/Images/404.jpg")) {
             ruta = vehiculo.getImagen();
-        }else{
+        } else {
             ruta = "";
         }
 
@@ -943,18 +947,17 @@ public class CrudVehiculo {
             }
         } else {
             mensajeError("Vehiculo no seleccionado", "Seleccione un vehiculo para continuar con la eliminicacion");
-        }
-    }
+        }}
 
-    //Metodo para el evento de limpiar campos
+    //Metodo para el evento de limpiar
     @FXML
     void eventoLimpiar(ActionEvent event) {
         limpiarCampos();
     }
 
-    //evento para guardar una imagen
+    //Metodo para el evento de guardar una imagen
     @FXML
-    void guardarImagen(ActionEvent event){
+    void guardarImagen(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccione una imagen");
         fileChooser.getExtensionFilters().addAll(
@@ -971,8 +974,8 @@ public class CrudVehiculo {
         }
     }
 
-    //Metodo para copiar la imagen de un vehiculo
-    public void copiarImagenAdmin(File archivoImagen,Vehiculo vehiculo){
+    //Metodo para copiar la imagen
+    public void copiarImagenAdmin(File archivoImagen, Vehiculo vehiculo) {
         String carpetaDestino = "src/main/resources/Images";
         String extension = getExtension(archivoImagen.getName());
         Path destino = Path.of(carpetaDestino, vehiculo.getPlaca() + "." + extension);
@@ -985,23 +988,20 @@ public class CrudVehiculo {
             vehiculo.setImagen(destino.toString());
             System.out.println("Imagen copiada en: " + destino.toString());
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+            e.printStackTrace();}}
 
-    //Metodo para obtener la extension de un archivo
+
     private String getExtension(String nombreArchivo) {
         int i = nombreArchivo.lastIndexOf('.');
-        return (i > 0) ? nombreArchivo.substring(i + 1) : "";
-    }
+        return (i > 0) ? nombreArchivo.substring(i + 1) : "";}
 
-    //Metodo para eliminar la imagen
+
     private void eliminarImagenProducto(String rutaImagen) {
         try {
             Path path = Paths.get(rutaImagen);
             Files.deleteIfExists(path); // Elimina el archivo si existe
-        } catch (IOException e) {}
-    }
+        } catch (IOException e) {}}
+
 
     //Metodo para crear un combustible
     private Combustible crearCombustible(){
@@ -1028,10 +1028,8 @@ public class CrudVehiculo {
             case "GASOLINA":
                 return new Gasolina(TipoCombustible.GASOLINA);
             default:
-                return null;
-        }
-    }
-    
+                return null;}}
+
     //Metodo para limpiar los campos
     private void limpiarCampos() {
         // Limpiar todos los campos de texto
@@ -1083,7 +1081,7 @@ public class CrudVehiculo {
         imagenSeleccionada = null;
     }
 
-    // Método para verificar que todos los campos estén completos
+    //Metodo para verificar los campos  de los vehiculos
     private boolean verificarCampos() {
         String tipoVehiculo = cbxTipoVehiculo.getValue();
         boolean camposCompletos = true;
@@ -1216,23 +1214,23 @@ public class CrudVehiculo {
         return camposCompletos;
     }
 
-    //Metodo para mostrar un mensaje de información
+    //Metodo para mostrar un mensaje de informacion
     public void mensajeInformacion(String title, String context){
 
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle(title);
-    alert.setHeaderText(null);
-    alert.setContentText(context);
-    alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(context);
+        alert.showAndWait();
     }
 
     //Metodo para mostrar un mensaje de error
     public void mensajeError(String title, String context){
 
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle(title);
-    alert.setHeaderText(" Error!!");
-    alert.setContentText(context);
-    alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(" Error!!");
+        alert.setContentText(context);
+        alert.showAndWait();
     }
 }

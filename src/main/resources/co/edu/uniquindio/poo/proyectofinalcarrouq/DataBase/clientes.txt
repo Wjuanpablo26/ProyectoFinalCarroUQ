@@ -1,0 +1,2 @@
+12345 %% juan %% juan@uq.com %% MASCULINO %% 30 %% 2024-11-14
+111 %% camilo %% camilo@uqvirtual %% MASCULINO %% 16 %% 2024-11-19

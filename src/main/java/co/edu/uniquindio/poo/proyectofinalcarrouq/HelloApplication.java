@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.proyectofinalcarrouq.Fxml;
+package co.edu.uniquindio.poo.proyectofinalcarrouq;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

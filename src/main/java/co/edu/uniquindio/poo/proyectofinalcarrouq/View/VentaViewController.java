@@ -258,7 +258,7 @@ public class VentaViewController {
         listaMotos.addAll(empleadoController.obtenerMotos());
         listaDeportivos.addAll(empleadoController.obtenerDeportivos());
         listaCamionetas.addAll(empleadoController.obtenerCamionetas());
-        listaPick.addAll(empleadoController.obtenerPicKups());
+        listaPick.addAll(empleadoController.obtenerPickups());
         listaVans.addAll(empleadoController.obtenerVan());
         listaBuses.addAll(empleadoController.obtenerBuses());
         listaCamiones.addAll(empleadoController.obtenerCamiones());

@@ -103,7 +103,7 @@ public class EmpleadoController {
         return modelFactory.actualizarPickUps(placa,pickup);
     }
 
-    public ArrayList<PickUps> obtenerPicKups(){
+    public ArrayList<PickUps> obtenerPickups(){
         return modelFactory.obtenerPickUps();
     }
 

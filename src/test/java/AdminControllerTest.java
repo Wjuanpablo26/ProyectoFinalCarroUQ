@@ -1,12 +1,13 @@
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.uniquindio.carrouq.Controller.AdminController;
-import com.uniquindio.carrouq.Exception.PersonaException;
-import com.uniquindio.carrouq.Model.Admin;
-import com.uniquindio.carrouq.Model.Enum.Genero;
-import com.uniquindio.carrouq.Model.UserName;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Controller.AdminController;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Exception.PersonaException;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Admin;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.Enum.Genero;
+import co.edu.uniquindio.poo.proyectofinalcarrouq.Model.UserName;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AdminControllerTest {
 

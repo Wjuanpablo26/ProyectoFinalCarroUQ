@@ -27,5 +27,14 @@ public class Cliente extends Persona{
     public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+
+    
+
+    //Metodo to String
+    @Override
+    public String toString() {
+        return ("Nombre:"+ super.getNombre()+ "  " +" Cedula:"+ super.getCedula());
+    }
+    
     
 }
